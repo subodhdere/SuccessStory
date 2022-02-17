@@ -41,5 +41,5 @@
 * kubectl rollout undo deployment <deployment_name> --to-revision=<revision_number>
 * kubectl autoscale deployment <deployment_name> --cpu-percent=50 --min=1 --max=10
 * kubectl get hpa
-  ex: generate load:
-  kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+    generate load :
+    kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
