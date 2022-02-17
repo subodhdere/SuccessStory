@@ -8,21 +8,28 @@
 * kubectl apply -f <file_name>.yaml
 * kubectl apply -f ./my1.yaml -f ./my2.yaml
 
+## Node
 
 * kubectl get nodes
 * kubectl describe node <nodename>
 * kubectl get nodes -o wide  
+
+## Pods
 
 * kubectl get pods
 * kubectl get pods --show-labels
 * kubectl get pods -o wide
 * kubectl describe pod <pod_name>
 
+## Service
+  
 * kubectl get svc
 * kubectl describe svc <service_name>
 * minikube service <service_name> --url
 
- * kubectl apply -f deployment_definition.yml
+## Deployment
+
+* kubectl apply -f deployment_definition.yml
 * kubectl apply -f deployment_definition.yml --record=true
 * kubectl get deployment
 * kubectl describe deployment <deployment_name>
