@@ -8,6 +8,7 @@
 * kubectl apply -f <file_name>.yaml
 * kubectl apply -f ./my1.yaml -f ./my2.yaml
 
+
 * kubectl get nodes
 * kubectl describe node <nodename>
 * kubectl get nodes -o wide  
