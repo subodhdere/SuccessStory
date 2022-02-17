@@ -14,7 +14,7 @@
 * kubectl describe node <nodename>
 * kubectl get nodes -o wide  
 
-## Pods
+## Pod
 
 * kubectl get pods
 * kubectl get pods --show-labels
