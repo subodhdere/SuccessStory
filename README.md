@@ -54,6 +54,17 @@
 * kubectl describe cm <cm_name>
 * kubectl edit cm <cm_name>  
   
+## Secrets
+* kubectl create secret generic <secret_name> --from-literal=city=pulgaon
+* kubectl create secret generic <secret_name> --from-file=<file_name>
+* kubectl create secret generic <secret_name> --from-file=<file_name> --from-file=<file_name>
+* kubectl create secret generic <secret_name> --from-file=<dir_name>
+* kubectl create secret generic <secret_name> --from-env-file=<file_name>
+* kubectl create secret generic <secret_name> --from-literal=city=pulgaon --dry-run=client -o yaml
+* kubectl get secret
+* kubectl describe secret <secret_name>
+* kubectl edit secret <secret_name>  
+  
   
   
   
