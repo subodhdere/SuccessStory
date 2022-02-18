@@ -42,3 +42,21 @@
 * kubectl autoscale deployment <deployment_name> --cpu-percent=50 --min=1 --max=10
 * kubectl get hpa
 * command to generate load : kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
+
+##ConfigMap
+* kubectl create cm <cm_name> --from-literal=city=pulgaon
+* kubectl create cm <cm_name> --from-file=<file_name>
+* kubectl create cm <cm_name> --from-file=<file_name> --from-file=<file_name>
+* kubectl create cm <cm_name> --from-file=<dir_name>
+* kubectl create cm <cm_name> --from-env-file=<file_name>
+* kubectl create cm <cm_name> --from-literal=city=pulgaon --dry-run=client -o yaml
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
