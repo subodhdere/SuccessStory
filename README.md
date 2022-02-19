@@ -77,8 +77,11 @@
 * kubectl describe limits <LimitRange_name> -n <namespace_name>
 * kubectl delete limits <LimitRange_name> -n <namespace_name>
 
-  
-  
+## Namespace
+* kubectl get ns
+* kubectl describe ns <ns_name>
+* kubectl config set-context --current --namespace=sd
+* curl servicename.nsname.svc.cluster.local  => access service from different ns  
   
   
   
