@@ -17,4 +17,6 @@ spec:
     max:
       cpu: 700m
       memory: 700m
+    maxLimitRequestRatio:
+      memory: 2
     type: Container
