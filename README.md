@@ -63,7 +63,10 @@
 * kubectl create secret generic <secret_name> --from-literal=city=pulgaon --dry-run=client -o yaml
 * kubectl get secret
 * kubectl describe secret <secret_name>
-* kubectl edit secret <secret_name>  
+* kubectl edit secret <secret_name>
+* aws ecr get-login OR docker login -u username -p password
+* kubectl create secret docker-registry my-registry-key --docker-server=https://private-repo --docker-username=user --docker-password=pwd
+* kubectl create secret generic my-registry-key --from-file=.dockerconfigjson=.docker/config.json --type=kubernetes.io/dockerconfigjson
   
 ## ResourceQuota
 * kubectl get quota -n <namespace_name>
