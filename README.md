@@ -65,6 +65,20 @@
 * kubectl describe secret <secret_name>
 * kubectl edit secret <secret_name>  
   
+## ResourceQuota
+* kubectl describe quota -n <namespace_name>
+* kubectl describe quota <ResourceQuota_name>
+* kubectl describe quota <ResourceQuota_name> -n <namespace_name>
+* kubectl delete quota <ResourceQuota_name> -n <namespace_name>
+  
+## LimitRange
+* kubectl describe lr -n <namespace_name>
+* kubectl describe lr <lr_name>
+* kubectl describe lr <lr_name> -n <namespace_name>
+* kubectl delete lr <lr_name> -n <namespace_name>
+
+  
+  
   
   
   
