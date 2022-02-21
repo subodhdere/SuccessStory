@@ -86,9 +86,16 @@
 * kubectl config set-context --current --namespace=sd
 * curl servicename.nsname.svc.cluster.local  => access service from different ns  
   
-  
-  
-  
+## Role
+* kubectl auth can-i delete pod -n test --as system.serviceaccount.default.default
+* kubectl create role roledel -n test --verb delete --resource pod
+* kubectl get role
+* kubectl describe role <rolename>
+* kubectl delete role <rolename>
+* kubectl create rolebinding rb1 -n test --role roledel --serviceaccount default:default  
+* kubectl get rolebinding
+* kubectl describe rolebinding <rolebindingname>
+* kubectl delete rolebinding <rolebindingname>
   
   
   
