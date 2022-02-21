@@ -90,12 +90,12 @@
 * kubectl auth can-i delete pod -n test --as system.serviceaccount.default.default
 * kubectl create role roledel -n test --verb delete --resource pod
 * kubectl get role
-* kubectl describe role <rolename>
-* kubectl delete role <rolename>
+* kubectl describe role <role_name>
+* kubectl delete role <role_name>
 * kubectl create rolebinding rb1 -n test --role roledel --serviceaccount default:default  
 * kubectl get rolebinding
-* kubectl describe rolebinding <rolebindingname>
-* kubectl delete rolebinding <rolebindingname>
+* kubectl describe rolebinding <rolebinding_name>
+* kubectl delete rolebinding <rolebinding_name>
   
   
   
