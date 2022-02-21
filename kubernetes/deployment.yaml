@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+  labels:
+    type: frontend
+spec:
+  replicas: 3
+  template:
+    metadata:
+      name: mypod
+      labels:
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  selector:
+    matchLabels:
+      subodh: dere
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+  labels:
+    type: frontend
+spec:
+  replicas: 8
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0%
+      maxUnavailable: 75%
+  template:
+    metadata:
+      name: mypod
+      labels:
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: subodhdere77/success-story:v2
+  selector:
+    matchLabels:
+      type: frontend
