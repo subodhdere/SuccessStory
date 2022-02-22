@@ -89,9 +89,8 @@
 ## ServiceAccount
 * kubectl get sa
 * kubectl describe sa <sa_name>
-* curl https://127.0.0.1:6443/api --insecure --header "Authorization: Bearer <token_>"
+* curl -v --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $token" https://10.43.0.1:443/api/v1/namespaces/default/pods/nginx
 * secret location : /var/run/secrets/kubernetes.io/serviceaccount
-  
 
 ## Role
 * kubectl auth can-i delete pod -n test --as system:serviceaccount:default:default
