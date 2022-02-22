@@ -85,7 +85,14 @@
 * kubectl describe ns <ns_name>
 * kubectl config set-context --current --namespace=sd
 * curl servicename.nsname.svc.cluster.local  => access service from different ns  
+
+## ServiceAccount
+* kubectl get sa
+* kubectl describe sa <sa_name>
+* curl https://127.0.0.1:6443/api --insecure --header "Authorization: Bearer <token_>"
+* secret location : /var/run/secrets/kubernetes.io/serviceaccount
   
+
 ## Role
 * kubectl auth can-i delete pod -n test --as system:serviceaccount:default:default
 * kubectl create role roledel -n test --verb delete --resource pod
