@@ -105,5 +105,12 @@
 * kubectl create clusterrole cr1 --verb delete --resource pod
 * kubectl create clusterrolebinding crb1 -n test --clusterrole cr1 --serviceaccount default:default
   
-  
+## Config
+* openssl genrsa -out subodh.key 2048
+* openssl req -new -key subodh.key -out subodh.csr -subj "/CN=subodh/O=devops"
+* openssl x509 -req -in subodh.csr -CA /var/lib/minikube/certs/ca.crt -CAkey /var/lib/minikube/certs/ca.key -CAcreateserial -out subodh.crt -days 200
+* kubectl config set-credentials subodh --client-certificate subodh.crt --client-key subodh.key
+* kubectl config set-context subodh-context --user subodh --cluster minikube
+* kubectl config use-context subodh-context
+* kubectl get po --as subodh
   
