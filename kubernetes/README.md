@@ -112,3 +112,7 @@
 * kubectl config set-context subodh-context --user subodh --cluster minikube
 * kubectl config use-context subodh-context
 * kubectl get po --as subodh
+
+## Scheduling
+* kubectl taint node minikube subodh=dere:NoSchedule|PreferNoSchedule|NoExecute
+* kubectl taint node minikube subodh=dere:NoSchedule-
