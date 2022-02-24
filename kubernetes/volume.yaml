@@ -35,3 +35,22 @@ spec:
     hostPath:
       path: /home/docker/sd
       type: Directory
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: sc1
+provisioner: "kubernetes.io/host-path"
+reclaimPolicy: Delete
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc1
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: sc1
