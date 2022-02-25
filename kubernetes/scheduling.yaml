@@ -10,4 +10,4 @@ spec:
     - key: subodh1
       value: dere1
       effect: NoSchedule
-      operator: Equal OR Exists
+      operator: Equal                      ##OR Exists
