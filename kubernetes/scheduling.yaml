@@ -11,3 +11,57 @@ spec:
       value: dere1
       effect: NoSchedule
       operator: Equal                      ##OR Exists
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p2
+spec:
+  containers:
+  - name: nginxconainer
+    image: nginx
+  nodeSelector:
+    disk: ssd
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: disk
+            operator: In
+            values:
+            - ssd1
+            - ssd2
+  containers:
+  - name: with-node-affinity
+    image: nginx
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: p1
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: disk
+            operator: In
+            values:
+            - ssd1
+            - ssd2
+  containers:
+  - name: affinity-prefferd
+    image: nginx
