@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job1
+spec:
+#  completions: 4 => number of iteration of same job
+#  parallelism: 2 => number of pods it should run in parallel
+#  backoffLimit: 4 => max number of time pod should go into error
+#  activeDeadlineSeconds: 10 => Pod execution should finish in 10 sec
+  template:
+    metadata:
+    spec:
+      containers:
+      - image: busybox
+        name: busybox
+        command:
+          - "sleep"
+          - "15"
+      restartPolicy: Never
+
+---
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob1
+spec:
+#  successfulJobsHistoryLimit: 1 #3 is default
+#  failedJobsHistoryLimit: 0     #1 is default 
+#  suspend: true                 #false is default
+#  concurrencyPolicy:             #allow( is default) / Forbid / Replace
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello
+            image: busybox
+            command:
+            - /bin/sh
+            - -c
+            - date; echo Hello from the Kubernetes cluster
+          restartPolicy: Never     
+
+#Forbid - If job is already running, then don't create new job as part of cronjob
