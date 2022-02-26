@@ -116,3 +116,13 @@
 ## Scheduling
 * kubectl taint node minikube subodh=dere:NoSchedule|PreferNoSchedule|NoExecute
 * kubectl taint node minikube subodh=dere:NoSchedule-
+
+## Job / Cronjob
+* kubectl create job job1 --image nginx
+* kubectl get job
+* kubectl describe job <job_name>
+* kubectl delete job <job_name>
+* kubectl get cj
+* kubectl describe cj <cj_name>
+* kubectl delete cj <cj_name>
+  
