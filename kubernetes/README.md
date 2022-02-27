@@ -20,6 +20,7 @@
 * kubectl get pods --show-labels
 * kubectl get pods -o wide
 * kubectl describe pod <pod_name>
+* kubectl delete pod --all
 
 ## Service
   
