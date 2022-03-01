@@ -82,6 +82,9 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/tmp/kube"
+#  nfs:
+#    path: "/srv/nfs/kube"
+#    server: 172.16.16.100    
 ---
 apiVersion: v1
 kind: Pod
