@@ -75,14 +75,13 @@ metadata:
     type: local
 spec:
   storageClassName: manual
-  persistentVolumeReclaimPolicy: Delete
+  persistentVolumeReclaimPolicy: Delete    #Default is Retain
   capacity:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
     path: "/tmp/kube"
- #persistentVolumeReclaimPolicy: Delete  (Default is Retain)
 ---
 apiVersion: v1
 kind: Pod
