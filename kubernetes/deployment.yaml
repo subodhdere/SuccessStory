@@ -17,7 +17,7 @@ spec:
           image: nginx
   selector:
     matchLabels:
-      subodh: dere
+      type: frontend
 ---
 apiVersion: apps/v1
 kind: Deployment
