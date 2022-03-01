@@ -1,0 +1,64 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: livenessprobe
+  name: livenessprobe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: livenessprobe
+  template:
+    metadata:
+      labels:
+        app: livenessprobe
+    spec:
+      containers:
+      - image: busybox
+        name: busyboz
+        args:
+          - "/bin/sh"
+          - -c
+          - touch hallo; sleep 20;rm hallo;sleep 600
+        livenessProbe:
+          exec:
+            command:
+              - cat
+              - hallo
+          initialDelaySeconds: 5
+          periodSeconds: 3
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: readinessprobe
+  name: readinessprobe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: readinessprobe
+  template:
+    metadata:
+      labels:
+        app: readinessprobe
+    spec:
+      containers:
+      - image: busybox
+        name: busyboz
+        args:
+          - "/bin/sh"
+          - -c
+          - sleep 20;touch hallo;sleep 600
+        readinessProbe:
+          exec:
+            command:
+              - cat
+              - hallo
+          initialDelaySeconds: 15
+          periodSeconds: 3
