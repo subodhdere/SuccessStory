@@ -135,3 +135,22 @@ spec:
   resources:
     requests:
       storage: 1Mi
+
+---
+
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test-pod
+spec:
+  containers:
+  - name: test-pod
+    image: nginx
+    volumeMounts:
+      - name: nfs-pvc
+        mountPath: "/tmp"
+  restartPolicy: "Never"
+  volumes:
+    - name: nfs-pvc
+      persistentVolumeClaim:
+        claimName: test-claim
