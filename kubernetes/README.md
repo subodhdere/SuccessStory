@@ -104,16 +104,17 @@
 * kubectl describe rolebinding <rolebinding_name>
 * kubectl delete rolebinding <rolebinding_name>
 * kubectl create clusterrole cr1 --verb delete --resource pod
-* kubectl create clusterrolebinding crb1 -n test --clusterrole cr1 --serviceaccount default:default
+* kubectl create clusterrolebinding crb1 --clusterrole cr1 --serviceaccount default:default
   
 ## Config
-* openssl genrsa -out subodh.key 2048
-* openssl req -new -key subodh.key -out subodh.csr -subj "/CN=subodh/O=devops"
-* openssl x509 -req -in subodh.csr -CA /var/lib/minikube/certs/ca.crt -CAkey /var/lib/minikube/certs/ca.key -CAcreateserial -out subodh.crt -days 200
-* kubectl config set-credentials subodh --client-certificate subodh.crt --client-key subodh.key
-* kubectl config set-context subodh-context --user subodh --cluster minikube
-* kubectl config use-context subodh-context
-* kubectl get po --as subodh
+* openssl genrsa -out santosh.key 2048
+* openssl req -new -key santosh.key -out santosh.csr -subj "/CN=santosh/O=devops"
+* scp root@kmaster:/etc/kubernetes/pki/ca.{crt,key} .
+* openssl x509 -req -in santosh.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out santosh.crt -days 365
+* kubectl --kubeconfig santosh.kubeconfig config set-cluster kubernetes --server https://172.16.16.100:6443 --certificate-authority=ca.crt
+* kubectl --kubeconfig santosh.kubeconfig config set-credentials santosh --client-certificate santosh.crt --client-key santosh.key
+* kubectl --kubeconfig santosh.kubeconfig config set-context santosh-kubernetes --namespace test --user santosh --cluster kubernetes
+* kubectl config use-context john-kubernetes --kubeconfig santosh.kubeconfig
 
 ## Scheduling
 * kubectl taint node minikube subodh=dere:NoSchedule|PreferNoSchedule|NoExecute
