@@ -28,6 +28,7 @@
 * kubectl get svc
 * kubectl describe svc <service_name>
 * minikube service <service_name> --url
+* k exec bz1 -- nslookup 192-168-41-151.default.pod
 
 ## Deployment
 
