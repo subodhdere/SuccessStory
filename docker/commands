@@ -1,0 +1,28 @@
+why docker ?
+docker architecture
+docker images
+docker container
+docker network
+docker volume
+docker dockerfile
+docker docker-compose
+docker swarm or k8s
+
+
+Dockerfile:
+==========
+docker image build -t myimage:v1 .
+docker container run -d --name mycontainer myimage:v1
+docker container exec -it mycontainer bash
+docker container rm -f mycontainer
+
+FROM nginx
+COPY index.html /usr/share/nginx/html/index.html
+RUN apt-get update && apt-get install vim -y
+RUN touch /tmp/1 /tmp/2 /tmp/3 /tmp/4 /tmp/5
+RUN touch a1 a2
+ENV var1 value1
+WORKDIR /tmp
+RUN touch w1 w2 w3 w4 w5
+WORKDIR /etc
+RUN touch e1 e2
