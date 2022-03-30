@@ -1,0 +1,17 @@
+---
+- hosts: all
+  tasks:
+  - name: stop container
+    command: docker container stop c1
+    ignore_errors: yes
+
+  - name: delete container
+    command: docker container rm c1
+    ignore_errors: yes
+
+  - name: remove image
+    command: docker image rm subodhdere77/regapp
+    ignore_errors: yes
+
+  - name: create container c1
+    command: docker container run -d --name c1 -p 8088:8080 subodhdere77/regapp
