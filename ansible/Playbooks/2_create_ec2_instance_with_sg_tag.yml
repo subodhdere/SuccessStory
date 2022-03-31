@@ -1,0 +1,19 @@
+---
+ - name: This play is used to create ec2 instance/s using SGs ang Tags
+   hosts: localhost
+   connection: local
+   gather_facts: false
+   tasks:
+   - name: Creating ec2 instance
+     ec2:
+      instance_type: t2.micro
+      image: ami-04893cdb768d0f9ee
+      count: 2
+      key_name: docker
+      region: ap-south-1
+      wait: yes 
+      group_id:
+        - sg-193bfb64
+        - sg-085f6ea36ab23463e
+      instance_tags:
+        Env: test

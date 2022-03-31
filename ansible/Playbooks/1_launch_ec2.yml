@@ -1,0 +1,11 @@
+---
+ - name: Launching aws ec2 instance
+   hosts: localhost
+   gather_facts: false
+   tasks:
+   - name: Launching ec2 instance with ec2 module 
+     ec2:
+      instance_type: t2.micro
+      image: ami-04893cdb768d0f9ee
+      key_name: docker
+      region: ap-south-1
