@@ -1,0 +1,26 @@
+---
+  - hosts: localhost
+    gather_facts: fasle
+    tasks:
+      - command: "ls /homee"
+        register: home_out
+        ignore_errors: yes
+      - debug: var=home_out
+      - command: "ls /tmp"
+        register: tmp_out
+      - debug: var=tmp_out
+
+---
+  - hosts: localhost
+    gather_facts: fasle
+    become: yes
+    tasks:
+      - name: starting nginx
+        service:
+          name: nginx
+          state: started
+        ignore_errors: yes
+      - name: starting httpd
+        service:
+          name: httpd
+          state: started

@@ -1,0 +1,22 @@
+# var_values.yaml
+---
+ x: 1
+ y: 2
+ pakgs:
+ - httpd
+ - nginx
+
+# read_variables_from_file.yaml
+---
+- hosts: localhost
+  vars_files: var_values.yaml
+  tasks:
+  - debug: var=x
+  - debug: var=y
+  - debug: var=pakgs
+
+
+
+
+
+

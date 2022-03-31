@@ -1,0 +1,14 @@
+---
+  - name: This is about test operators
+    hosts: localhost
+    gather_facts: false
+    vars:
+      x: 40
+      y: 50
+      z: 60
+    tasks:
+      - debug:
+          msg:
+            - "x<y and y<z {{x<y and y<z}}"
+            - "x<y or y<z {{x<y and y<z}}"
+            - "x<y and y>z {{x<y and y>z}}"

@@ -1,0 +1,33 @@
+---
+  - hosts: localhost
+    gather_facts: false
+    become: yes
+    tasks:
+      - name: Install nginx
+        apt:
+          name: nginx
+          state: present
+        register: output
+      - debug: var=output.changed 
+      - name: start nginx
+        service:
+          name: nginx
+          state: started
+        when: output.changed == True
+
+---
+  - hosts: localhost
+    gather_facts: false
+    become: yes
+    tasks:
+      - name: Install nginx
+        apt:
+          name: nginx
+          state: present
+        notify:
+          - start nginx
+    handlers:
+      - name: start nginx
+        service:
+          name: nginx
+          state: started

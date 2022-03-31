@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+#  vars:
+#    x: 1
+  tasks:
+  - debug: var=x
+
+#ansible-playbook b.yaml -e "x=2"
+#ansible-playbook b.yaml -e "x=2 y=4"
+#ansible-playbook b.yaml -e "x=[1,2,3,4]"
+#ansible-playbook b.yaml -e "x=@varible_value.yaml"

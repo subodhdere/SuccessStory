@@ -1,0 +1,37 @@
+---
+  - name: Play with 5 tasks
+    hosts: localhost
+    gather_facts: false
+    tasks:
+      - debug:
+          msg: "This is a first task"
+        tags:
+          - first
+          - common
+          - always
+      - debug:
+          msg: "This is a second task"
+        tags:
+          - second
+          - never
+      - debug:
+          msg: "This is a third task"
+        tags:
+          - third
+          - common
+          - never
+      - debug:
+          msg: "This is a fourth task"
+        tags:
+          - fourth
+          - never
+      - debug:
+          msg: "This is a fifth task"
+        tags:
+          - fifth
+          - never
+
+#ansible-playbook <your_yaml_file> --tags tag_1,tag_2
+#ansible-playbook <your_yaml_file> --skip-tags tag_1,tag_2
+#ansible-playbook <your_yaml_file> --list-tags
+#Note: It wont display the tags of a task if one of the tag value is never
