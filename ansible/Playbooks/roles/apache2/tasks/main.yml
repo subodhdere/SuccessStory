@@ -1,0 +1,15 @@
+---
+# tasks file for apache2
+      - name: Install apache2
+        apt:
+          name: apache2
+          state: present
+        notify:
+          - start apache2
+      - name: debug task
+        debug: var=state
+      - name: copy a file
+        template:
+          src: ./server.xml.j2
+          dest: /tmp/server.xml
+

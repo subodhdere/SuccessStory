@@ -1,0 +1,11 @@
+---
+ - hosts: all
+   gather_facts: false
+   vars:
+     city: pulgaon
+   tasks:
+   - name: copy a file
+     template:
+       src: ./server.xml.j2
+       dest: /tmp/server.xml
+      
