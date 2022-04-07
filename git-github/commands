@@ -1,0 +1,40 @@
+GIT
+===
+
+git config --global user.name subodhdere
+git config --global user.email "subodh.dere.7@gmail.com"
+git add .
+git commit -m "msg"
+git commit -a -m "new changes" => add to stage and commit in single command
+git rm --cached .classpath => remove file from existing commit
+git log -2
+git remote -v
+git remote add origin https://github.com/subodhdere/learnGit.git
+git push -u origin master
+git clone <url>
+ssh connection
+git remote set-url origin git@github.com:subodhdere/learnGit.git
+git push
+git branch b1
+git branch
+git branch -r => list of branches in remote repository
+git branch -a
+git checkout -b b1
+git push -u origin b1
+git branch -d b1 => delete branch localy
+git push origin --delete b1 => delete branch from remote repository
+git checkout master
+pull request
+git fetch
+git merge
+git pull
+git reset HEAD~2 => remove last 2 commits localy & files kept in working area (default --mixed)
+--soft => keeps changes in staging area
+--hard => removes changes from staging & working area
+.gitignore
+    mylogs.log
+    /mylogs.log
+    *.log
+    waste/
+    .gitignore
+git cherry-pick 2ca453dca1
