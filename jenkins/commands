@@ -1,0 +1,85 @@
+Jenkins:
+=======================================================================
+Java application
+Platform independent
+Used for CICD
+Create new uses + Manage + Assign Roles
+  Role-based Authorization StrategyVersion Plugin
+  Configure Global Security
+  Manage & Assign Role
+Nodes
+Trigger build remotely  
+job1 -> job2
+Parameterized Build
+Build Monitor Plugin
+=======================================================================
+
+Install Jenkins : On jenkins server
+
+Ubuntu :
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+apt-get update
+apt install ca-certificates
+apt-get install jenkins
+
+Redhat :
+wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+yum upgrade
+yum install java-11-openjdk
+yum install jenkins
+systemctl daemon-reload
+
+Default Port : 8080
+
+=======================================================================
+
+Install Maven : On jenkins server
+
+cd /opt
+wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
+
+export M2_HOME=/opt/maven
+export M2=/opt/maven/bin
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+set PATH varaible
+
+=======================================================================
+
+Install Tomcat : On remote server
+
+cd /opt
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
+
+tomcat-user.xml :
+ <role rolename="manager-gui"/>
+ <role rolename="manager-script"/>
+ <role rolename="manager-jmx"/>
+ <role rolename="manager-status"/>
+ <user username="admin" password="admin" roles="manager-gui, manager-script, manager-jmx, manager-status"/>
+ <user username="deployer" password="deployer" roles="manager-script"/>
+ <user username="tomcat" password="s3cret" roles="manager-gui"/>
+
+Default Port : 8080
+
+=======================================================================
+
+Install java : on jenkins and tomcat server
+
+apt-get install openjdk-11-jdk
+
+=======================================================================
+
+Publish Over SSH plugin to copy artifacts to remote server
+GitHub Plugin for Jenkins
+Maven Integration plugin
+Deploy to container
+
+=======================================================================
