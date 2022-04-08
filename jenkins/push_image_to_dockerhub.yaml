@@ -25,5 +25,5 @@
 
   - name: change tag in helm chart
     command: sh /opt/docker/change_tag.sh {{BUILD_NUMBER}}
-    tag:
+    tags:
     - never
