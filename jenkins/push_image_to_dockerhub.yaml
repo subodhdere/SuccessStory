@@ -22,3 +22,8 @@
 
   - name: push docker image
     command: docker image push subodhdere77/mytom:{{BUILD_NUMBER}}
+
+  - name: change tag in helm chart
+    command: sh /opt/docker/change_tag.sh {{BUILD_NUMBER}}
+    tag:
+    - never

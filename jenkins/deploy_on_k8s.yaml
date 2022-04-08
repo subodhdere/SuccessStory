@@ -1,0 +1,6 @@
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+  - name: deploy using helm chart
+    command: helm upgrade --install tom /opt/docker/mytom/
