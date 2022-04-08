@@ -1,23 +1,24 @@
 ---
 - hosts: all
+  gather_facts: no
   tasks:
   - name: delete docker image
-    command: docker image rm regapp
+    command: docker image rm mytom
     ignore_errors: yes
 
   - name: create docker image
-    command: docker image build -t regapp .
+    command: docker image build -t mytom .
     args:
-      chdir: /opt/docker-ansible
+      chdir: /opt/docker
 
   - name: tag docker image
-    command: docker image tag regapp subodhdere77/regapp
+    command: docker image tag mytom subodhdere77/mytom:{{BUILD_NUMBER}}
 
   - name: Log into DockerHub
     docker_login:
       username: subodhdere77
-      password: aaibaba77
+      password: Dummypass@11
       email: subodh.dere.7@gmail.com
 
   - name: push docker image
-    command: docker image push subodhdere77/regapp
+    command: docker image push subodhdere77/mytom:{{BUILD_NUMBER}}
