@@ -17,11 +17,22 @@
 
 ## Pod
 
-* kubectl get pods
-* kubectl get pods --show-labels
-* kubectl get pods -o wide
-* kubectl describe pod <pod_name>
+* kubectl run nginx-pod --image nginx
+* kubectl get pod
+* kubectl get pod -o wide
+* kubectl describe pod nginx-pod
+* kubectl logs nginx-pod
+* kubectl logs -f nginx-pod
+* kubectl get pod --show-labels
+* kubectl get pod -l tier=frontend
 * kubectl delete pod --all
+* kubectl exec -it nginx-pod -- bash
+* kubectl delete pod nginx-podd
+* kubectl run nginx-pod --image nginx --dry-run=client
+* kubectl run nginx-pod --image nginx --dry-run=client -o yaml
+* kubectl apply -f pod.yaml
+* kubectl delete -f pod.yaml
+
 
 ## Service
   
