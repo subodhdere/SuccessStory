@@ -53,10 +53,15 @@
 * kubectl rollout history deployment <deployment_name>
 * kubectl rollout undo deployment <deployment_name>
 * kubectl rollout undo deployment <deployment_name> --to-revision=<revision_number>
+* kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 * kubectl autoscale deployment <deployment_name> --cpu-percent=50 --min=1 --max=10
 * kubectl get hpa
-* command to generate load : kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://php-apache; done"
 
+Note : Edit metrics server deployment with below to ignore ssl
+command:
+- /metrics-server
+- --kubelet-insecure-tls
+  
 ## ConfigMap
 * kubectl create cm <cm_name> --from-literal=city=pulgaon
 * kubectl create cm <cm_name> --from-file=<file_name>
