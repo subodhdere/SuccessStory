@@ -3,7 +3,6 @@
 # Commands :
 
 * kubectl api-resources
-
 * kubectl create -f <file_name>.yaml
 * kubectl apply -f <file_name>.yaml
 * kubectl apply -f ./my1.yaml -f ./my2.yaml
