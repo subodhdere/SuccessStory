@@ -57,9 +57,9 @@
 * kubectl get hpa
 
 Note : Edit metrics server deployment with below to ignore ssl
-command:
-- /metrics-server
-- --kubelet-insecure-tls
+    command:
+    - /metrics-server
+    - --kubelet-insecure-tls
   
 ## ConfigMap
 * kubectl create cm <cm_name> --from-literal=city=pulgaon
