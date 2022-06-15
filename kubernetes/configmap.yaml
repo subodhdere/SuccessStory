@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: simple-webapp-color
-      image: kodekloud/webapp-color
+      image: subodhdere/webapp-color
       envFrom:
       - configMapRef:
           name: cmenv
@@ -35,4 +35,3 @@ spec:
   - name: test
     configMap:
       name: cmenv
-            
