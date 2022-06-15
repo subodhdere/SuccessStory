@@ -83,7 +83,7 @@ Note : Edit metrics server deployment with below to ignore ssl
 * kubectl describe secret <secret_name>
 * kubectl edit secret <secret_name>
 * aws ecr get-login OR docker login -u username -p password
-* kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=subodhdere77 --docker-password=****** --docker-email=subodhdere77@gmail.com
+* kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=subodhdere --docker-password=Docker@11 --docker-email=subodh.dere.7@gmail.com
   
 ## ResourceQuota
 * kubectl get quota -n <namespace_name>
