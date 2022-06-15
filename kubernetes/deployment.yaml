@@ -26,6 +26,29 @@ metadata:
   labels:
     type: frontend
 spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      name: mypod
+      labels:
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  selector:
+    matchLabels:
+      type: frontend      
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+  labels:
+    type: frontend
+spec:
   replicas: 8
   strategy:
     type: RollingUpdate
