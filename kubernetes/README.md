@@ -32,13 +32,20 @@
 * kubectl apply -f pod.yaml
 * kubectl delete -f pod.yaml
 
-
 ## Service
   
 * kubectl get svc
 * kubectl describe svc <service_name>
 * minikube service <service_name> --url
 * k exec bz1 -- nslookup 192-168-41-151.default.pod
+
+## Deployment
+
+* kubectl apply -f rs_definition.yml
+* kubectl get replicaset
+* kubectl describe replicaset <replicaset_name>
+* kubectl edit replicaset <replicaset_name>
+* kubectl delete replicaset <replicaset_name>
 
 ## Deployment
 
@@ -62,29 +69,35 @@ Note : Edit metrics server deployment with below to ignore ssl
     - --kubelet-insecure-tls
   
 ## ConfigMap
-* kubectl create cm <cm_name> --from-literal=city=pulgaon
-* kubectl create cm <cm_name> --from-file=<file_name>
-* kubectl create cm <cm_name> --from-file=<file_name> --from-file=<file_name>
-* kubectl create cm <cm_name> --from-file=<dir_name>
-* kubectl create cm <cm_name> --from-env-file=<file_name>
-* kubectl create cm <cm_name> --from-literal=city=pulgaon --dry-run=client -o yaml
+* kubectl create cm <cm_name> --from-literal city=pulgaon
+* kubectl create cm <cm_name> --from-env-file <file_name>
+* kubectl create cm <cm_name> --from-file <file_name>
+* kubectl create cm <cm_name> --from-file <file_name> --from-file <file_name>
+* kubectl create cm <cm_name> --from-file <dir_name>
+* kubectl create cm <cm_name> --from-literal city=pulgaon --dry-run=client -o yaml
 * kubectl get cm
 * kubectl describe cm <cm_name>
 * kubectl edit cm <cm_name>  
+* kubectl delete cm <cm_name>
   
 ## Secrets
-* kubectl create secret generic <secret_name> --from-literal=city=pulgaon
-* kubectl create secret generic <secret_name> --from-file=<file_name>
-* kubectl create secret generic <secret_name> --from-file=<file_name> --from-file=<file_name>
-* kubectl create secret generic <secret_name> --from-file=<dir_name>
-* kubectl create secret generic <secret_name> --from-env-file=<file_name>
-* kubectl create secret generic <secret_name> --from-literal=city=pulgaon --dry-run=client -o yaml
+* kubectl create secret generic <secret_name> --from-literal city=pulgaon
+* kubectl create secret generic <secret_name> --from-env-file <file_name>
+* kubectl create secret generic <secret_name> --from-file <file_name>
+* kubectl create secret generic <secret_name> --from-file <file_name> --from-file <file_name>
+* kubectl create secret generic <secret_name> --from-file <dir_name>
+* kubectl create secret generic <secret_name> --from-literal city=pulgaon --dry-run=client -o yaml
 * kubectl get secret
 * kubectl describe secret <secret_name>
 * kubectl edit secret <secret_name>
 * aws ecr get-login OR docker login -u username -p password
 * kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=subodhdere --docker-password=Docker@11 --docker-email=subodh.dere.7@gmail.com
-  
+* kubectl delete secret <secret_name>
+
+## Ingress
+* minikube addons enable ingress
+* kubectl get ingress
+
 ## ResourceQuota
 * kubectl get quota -n <namespace_name>
 * kubectl describe quota <ResourceQuota_name>
