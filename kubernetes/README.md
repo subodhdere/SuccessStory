@@ -33,11 +33,16 @@
 * kubectl delete -f pod.yaml
 
 ## Service
-  
+
+* kubectl expose pod <pod_name> --type NodePort --port 80 --name frontend-service
+* kubectl expose pod <pod_name> --type LoadBalancer --port 80 --name frontend-service
+* kubectl expose pod <pod_name> --type ClusterIp --port 80 --name backend-service
 * kubectl get svc
 * kubectl describe svc <service_name>
 * minikube service <service_name> --url
 * k exec bz1 -- nslookup 192-168-41-151.default.pod
+* kubectl edit svc <service_name>
+* kubectl delete svc <service_name>
 
 ## Deployment
 
