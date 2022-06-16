@@ -1,5 +1,7 @@
 # SuccessStory
 
+*Setup
+
 # Commands :
 
 * kubectl api-resources
