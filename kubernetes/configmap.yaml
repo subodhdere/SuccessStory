@@ -35,3 +35,11 @@ spec:
   - name: test
     configMap:
       name: cmenv
+---
+apiVersion: v1
+data:
+  key1: value1
+immutable: true
+kind: ConfigMap
+metadata:
+  name: cm1
