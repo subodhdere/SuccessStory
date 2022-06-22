@@ -127,25 +127,19 @@ Note : Edit metrics server deployment with below to ignore ssl
 * kubectl describe ns <ns_name>
 * kubectl config set-context --current --namespace=sd
 * curl servicename.nsname.svc.cluster.local  => access service from different ns  
-
-## ServiceAccount
-* kubectl get sa
-* kubectl describe sa <sa_name>
-* curl -v --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt -H "Authorization: Bearer $token" https://10.43.0.1:443/api/v1/namespaces/default/pods/nginx
-* secret location : /var/run/secrets/kubernetes.io/serviceaccount
-
+    
 ## Role
-* kubectl auth can-i delete pod -n test --as system:serviceaccount:default:default
+* kubectl auth can-i delete pod -n test --as santosh
 * kubectl create role roledel -n test --verb delete --resource pod
 * kubectl get role
 * kubectl describe role <role_name>
 * kubectl delete role <role_name>
-* kubectl create rolebinding rb1 -n test --role roledel --serviceaccount default:default  
+* kubectl create rolebinding rb1 -n test --role roledel --user santosh  
 * kubectl get rolebinding
 * kubectl describe rolebinding <rolebinding_name>
 * kubectl delete rolebinding <rolebinding_name>
-* kubectl create clusterrole cr1 --verb delete --resource pod
-* kubectl create clusterrolebinding crb1 --clusterrole cr1 --serviceaccount default:default
+* kubectl create clusterrole cr1 --verb list --resource pod
+* kubectl create clusterrolebinding crb1 --clusterrole cr1 --user santosh
   
 ## Config
 * openssl genrsa -out santosh.key 2048
@@ -154,9 +148,14 @@ Note : Edit metrics server deployment with below to ignore ssl
 * openssl x509 -req -in santosh.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out santosh.crt -days 365
 * kubectl --kubeconfig santosh.kubeconfig config set-cluster kubernetes --server https://172.16.16.100:6443 --certificate-authority=ca.crt
 * kubectl --kubeconfig santosh.kubeconfig config set-credentials santosh --client-certificate santosh.crt --client-key santosh.key
-* kubectl --kubeconfig santosh.kubeconfig config set-context santosh-kubernetes --namespace test --user santosh --cluster kubernetes
-* kubectl config use-context john-kubernetes --kubeconfig santosh.kubeconfig
-
+* kubectl --kubeconfig santosh.kubeconfig config set-context santosh-kubernetes --user santosh --cluster kubernetes
+* kubectl config use-context santosh-kubernetes --kubeconfig santosh.kubeconfig
+* kubectl auth can-i create pod -n test --kubeconfig santosh.kubeconfig
+* kubectl create role role1 -n test --verb create,list,delete --resource pod
+* kubectl create rolebinding rb1 -n test --role role1 --user santosh
+* kubectl get pod -n test --kubeconfig santosh.kubeconfig
+    
+    
 ## Scheduling
 * kubectl taint node minikube subodh=dere:NoSchedule|PreferNoSchedule|NoExecute
 * kubectl taint node minikube subodh=dere:NoSchedule-
