@@ -112,13 +112,13 @@ Note : Edit metrics server deployment with below to ignore ssl
 
 ## ResourceQuota
 * kubectl get quota -n <namespace_name>
-* kubectl describe quota <ResourceQuota_name>
+* kubectl describe quota <ResourceQuota_name> -n <namespace_name>
 * kubectl describe quota <ResourceQuota_name> -n <namespace_name>
 * kubectl delete quota <ResourceQuota_name> -n <namespace_name>
   
 ## LimitRange
 * kubectl describe limits -n <namespace_name>
-* kubectl describe limits <LimitRange_name>
+* kubectl describe limits <LimitRange_name> -n <namespace_name>
 * kubectl describe limits <LimitRange_name> -n <namespace_name>
 * kubectl delete limits <LimitRange_name> -n <namespace_name>
 
