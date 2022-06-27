@@ -1,0 +1,22 @@
+kmaster:
+apt update
+apt install nfs-kernel-server
+apt install nfs-utils
+apt install nfs-common
+mkdir -p /srv/nfs/kubedata
+chmod 777 /srv/nfs/kubedata
+chown nobody: /srv/nfs/kubedata
+echo "/srv/nfs/kubedata *(rw,sync,no_subtree_check,no_root_squash,no_all_squash,insecure)" >> /etc/exports
+systemctl enable --now nfs-server
+exportfs -rav
+showmount -e localhost
+
+kworker:
+apt update
+apt install nfs-common
+mkdir -p /srv/nfs/kubedata
+chmod 777 /srv/nfs/kubedata
+sudo mount -t nfs 172.16.16.100:/srv/nfs/kubedata /srv/nfs/kubedata
+
+GitHub:
+git clone https://github.com/kubernetes-sigs/nfs-subdir-external-provisioner.git  #v4.0.2 branch
