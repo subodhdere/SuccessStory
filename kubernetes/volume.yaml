@@ -63,3 +63,6 @@ spec:
     volumeMounts:
     - name: host-volume
       mountPath: /mydata
+ 
+ # Note:
+ # kubectl patch pv pv-hostpath -p '{"spec":{"claimRef": null}}' => change pv state from release to available
