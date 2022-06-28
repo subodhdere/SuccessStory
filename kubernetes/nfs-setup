@@ -1,7 +1,6 @@
 kmaster:
 apt update
 apt install nfs-kernel-server
-apt install nfs-utils
 apt install nfs-common
 mkdir -p /srv/nfs/kubedata
 chmod 777 /srv/nfs/kubedata
