@@ -3,7 +3,6 @@ kind: Job
 metadata:
   name: job1
 spec:
-#  ttlSecondsAfterFinished: 10   => first update api and controller with feature-gates=TTLAfterFinished=true
 #  completions: 4 => number of iteration of same job
 #  parallelism: 2 => number of pods it should run in parallel
 #  backoffLimit: 4 => max number of time pod should go into error
