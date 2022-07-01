@@ -3,10 +3,10 @@ kind: Job
 metadata:
   name: job1
 spec:
-#  completions: 4 => number of iteration of same job
-#  parallelism: 2 => number of pods it should run in parallel
-#  backoffLimit: 4 => max number of time pod should go into error
-#  activeDeadlineSeconds: 10 => Pod execution should finish in 10 sec
+#  completions: 4 # number of iteration of same job
+#  parallelism: 2 # number of pods it should run in parallel
+#  backoffLimit: 4 # max number of time pod should go into error
+#  activeDeadlineSeconds: 10 # Pod execution should finish in 10 sec
   template:
     metadata:
     spec:
