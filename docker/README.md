@@ -21,29 +21,18 @@ docker version
 systemctl enable docker
 ```
 
-For Ubuntu :
-```
-apt-get update
-apt-get install docker.io -y   
-service docker status
-service docker start
-docker version
-systemctl enable docker
-```
-
-
 ## Docker Container
 > Note: CID = container ID or name
 ```sh
-docker container ls 				or		 ps
-docker container ls -a 			or		 ps -a
+docker container ls or ps
+docker container ls -a or ps -a
 docker container rm CID
 docker container rm -f CID
 docker container start CID
 docker container stop CID
 docker container restart CID
 docker container rename CID <new_name>
-docker container exec -it CID bash `or u an provide sh as well instead of bash`
+docker container exec -it CID bash => or u an provide sh as well instead of bash
 docker container logs CID
 docker container kill CID
 docker container prune  => to delete stopped containers
