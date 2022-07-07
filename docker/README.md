@@ -32,7 +32,7 @@ docker container start CID
 docker container stop CID
 docker container restart CID
 docker container rename CID <new_name>
-docker container exec -it CID bash > or u an provide sh as well instead of bash
+docker container exec -it CID bash `or u an provide sh as well instead of bash`
 docker container logs CID
 docker container kill CID
 docker container prune  => to delete stopped containers
