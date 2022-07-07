@@ -1,8 +1,18 @@
 # SuccessStory
 
-## Setup
-alias k=kubectl
-alias c=clear
-alias h=history
-complete -F __start_kubectl k
-source <(kubectl completion bash)
+# Docker Installation
+
+For RHEL :
+* yum install docker -y   
+* service docker status
+* service docker start
+* docker –version
+* systemctl enable docker
+
+For Ubuntu :
+* apt-get update
+* apt-get install docker.io -y   
+* service docker status
+* service docker start
+* docker –version
+* systemctl enable docker
