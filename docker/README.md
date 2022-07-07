@@ -21,7 +21,7 @@ docker version
 systemctl enable docker
 ```
 
-## Docker Container Commands:
+## Docker Container
 > Note: CID = container ID or name
 ```sh
 docker container ls 				or		 ps
@@ -50,20 +50,20 @@ docker container -d -p <host_port>:<container_port> nginx
 docker container run -d -p 3456:8080 -e APP_COLOR=red kodekloud/webapp-color
 ```
 
-## Dockerfile :
+## Dockerfile
 ```sh
 docker image build -t mynginx .
 docker image build -t mynginx -f mydockerfile .
 ```
 
-## Push to DockerHub :
+## Push to DockerHub
 ```sh
 docker login
 docker image tag myImage subodhdere/imageName:v1
 docker image push subodhdere/imageName:v1
 ```
 
-## Docker Volume Commands :
+## Docker Volume
 ```sh
 docker volume create	=> Create a volume
 docker volume inspect	=> Display detailed information on one or more volumes
@@ -75,7 +75,7 @@ docker container run -d --name c1 -v mynginxvolume:/data01 nginx => Named volume
 docker container run -d --name c1 -v /root/learnDocker:/tmp nginx => Host or Bind volume
 ```
 
-## Docker Network Commands :
+## Docker Network
 ```sh
 docker network connect => Connect a container to a network
 docker network create	=> Create a network
