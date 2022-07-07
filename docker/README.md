@@ -51,9 +51,9 @@ For Ubuntu :
 * docker image build -t mynginx -f mydockerfile .
 
 # Push to DockerHub :
-docker login
-docker image tag myImage subodhdere/imageName:v1
-docker image push subodhdere/imageName:v1
+* docker login
+* docker image tag myImage subodhdere/imageName:v1
+* docker image push subodhdere/imageName:v1
 
 # Docker Volume Commands :
 * docker volume create	=> Create a volume
