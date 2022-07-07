@@ -39,15 +39,22 @@ docker container prune  => to delete stopped containers
 docker container ls -aq => to list all container id
 docker container inspect <container_id or name>
 docker image inspect <image_id>
+
 docker container cp file_name container_id@path
 docker container cp index.html mynginxContainer:/usr/share/nginx/html/index.html
+
 docker container run -d --name subodhContainer nginx => create container in detached mode with container name as subodhContainer
+
 docker container stop `docker container ps -q` => to stop all running containers
 docker container rm `docker container ps -aq` => to delete all stopped containers
-docker container export cid > a.tar
-docker image import a.tar myImage
+
+docker container export cid > myimage.tar
+docker image import myimage.tar mycustomimage
+docker container run -d mycustomimage bash
+
 docker container -d -p <host_port>:<container_port> nginx 
-docker container run -d -p 3456:8080 -e APP_COLOR=red kodekloud/webapp-color
+docker container run -d -p 3456:8080 kodekloud/webapp-color
+docker container run -d -e APP_COLOR=red kodekloud/webapp-color
 ```
 
 ## Dockerfile
