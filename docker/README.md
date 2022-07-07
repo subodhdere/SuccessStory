@@ -22,8 +22,8 @@ systemctl enable docker
 ```
 
 # Docker Container Commands:
-```sh
 > Note: CID = container ID or name
+```sh
 docker container ls 				or		 ps
 docker container ls -a 			or		 ps -a
 docker container rm CID
