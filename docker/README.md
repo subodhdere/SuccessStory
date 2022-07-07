@@ -41,7 +41,7 @@ docker container inspect <container_id or name>
 docker image inspect <image_id>
 docker container cp file_name container_id@path
 docker container cp index.html mynginxContainer:/usr/share/nginx/html/index.html
-docker container run -d –name subodhContainer nginx => create container in detached mode with container name as subodhContainer
+docker container run -d --name subodhContainer nginx => create container in detached mode with container name as subodhContainer
 docker container stop `docker container ps -q` => to stop all running containers
 docker container rm `docker container ps -aq` => to delete all stopped containers
 docker container export cid > a.tar
