@@ -20,7 +20,6 @@ For Ubuntu :
 # Docker Container Commands:
 
 * CID = container ID or name
-
 * docker container ls 				or		 ps
 * docker container ls -a 			or		 ps -a
 * docker container rm CID
@@ -47,15 +46,18 @@ For Ubuntu :
 * docker container run -d -p 3456:8080 -e APP_COLOR=red kodekloud/webapp-color
 
 # Dockerfile :
+
 * docker image build -t mynginx .
 * docker image build -t mynginx -f mydockerfile .
 
 # Push to DockerHub :
+
 * docker login
 * docker image tag myImage subodhdere/imageName:v1
 * docker image push subodhdere/imageName:v1
 
 # Docker Volume Commands :
+
 * docker volume create	=> Create a volume
 * docker volume inspect	=> Display detailed information on one or more volumes
 * docker volume ls => List volumes
