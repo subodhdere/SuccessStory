@@ -21,6 +21,17 @@ docker version
 systemctl enable docker
 ```
 
+For Ubuntu :
+```
+apt-get update
+apt-get install docker.io -y   
+service docker status
+service docker start
+docker version
+systemctl enable docker
+```
+
+
 ## Docker Container
 > Note: CID = container ID or name
 ```sh
