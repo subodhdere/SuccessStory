@@ -51,11 +51,9 @@ For Ubuntu :
 * docker image build -t mynginx -f mydockerfile .
 
 ```sh
-docker image build -t mynginx .
-docker image build -t mynginx -f mydockerfile .
-docker login
-docker image tag myImage subodhdere/imageName:v1
-docker image push subodhdere/imageName:v1
+cd dillinger
+npm i
+node app
 ```
 
 # Push to DockerHub :
