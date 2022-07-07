@@ -43,4 +43,49 @@ For Ubuntu :
 * docker container rm `docker container ps -aq` => to delete all stopped containers
 * docker container export cid > a.tar
 * docker image import a.tar myImage
-* docker run -dit myImage bash
+* docker container -d -p <host_port>:<container_port> nginx 
+* docker container run -d -p 3456:8080 -e APP_COLOR=red kodekloud/webapp-color
+
+# Dockerfile :
+* docker image build -t mynginx .
+* docker image build -t mynginx -f mydockerfile .
+
+# Push to DockerHub :
+docker login
+docker image tag myImage subodhdere/imageName:v1
+docker image push subodhdere/imageName:v1
+
+# Docker Volume Commands :
+* docker volume create	=> Create a volume
+* docker volume inspect	=> Display detailed information on one or more volumes
+* docker volume ls => List volumes
+* docker volume prune	=> Remove all unused local volumes
+* docker volume rm => Remove one or more volumes
+* docker container run -d --name c1 -v /data01 nginx => Anonymous volume
+* docker container run -d --name c1 -v mynginxvolume:/data01 nginx => Named volume
+* docker container run -d --name c1 -v /root/learnDocker:/tmp nginx => Host or Bind volume
+
+# Docker Network Commands :
+
+* docker network connect => Connect a container to a network
+* docker network create	=> Create a network
+* docker network disconnect => Disconnect a container from a network
+* docker network inspect => Display detailed information on one or more networks
+* docker network ls	=> List networks
+* docker network prune => Remove all unused networks
+* docker network rm	=> Remove one or more networks
+
+* docker network create app1
+* docker run -d --network=app1 –name c1 nginx
+
+* docker network create app2
+* docker run -d --network=app2 –name c2 nginx
+
+* docker container run -d --network host –name c1 nginx
+* docker container run -d --network none –name c2 nginx
+
+* docker container inspect c1
+
+Install ping inside container:
+* apt-get update && apt-get install inetutils-ping -y
+
