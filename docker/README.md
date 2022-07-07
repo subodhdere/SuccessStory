@@ -7,7 +7,7 @@ For RHEL :
 yum install docker -y   
 service docker status
 service docker start
-docker –version
+docker version
 systemctl enable docker
 ```
 
@@ -17,7 +17,7 @@ apt-get update
 apt-get install docker.io -y   
 service docker status
 service docker start
-docker –version
+docker version
 systemctl enable docker
 ```
 
