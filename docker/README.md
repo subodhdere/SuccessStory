@@ -76,18 +76,12 @@ For Ubuntu :
 * docker network ls	=> List networks
 * docker network prune => Remove all unused networks
 * docker network rm	=> Remove one or more networks
-
 * docker network create app1
 * docker run -d --network=app1 –name c1 nginx
-
 * docker network create app2
 * docker run -d --network=app2 –name c2 nginx
-
 * docker container run -d --network host –name c1 nginx
 * docker container run -d --network none –name c2 nginx
-
 * docker container inspect c1
-
 Install ping inside container:
 * apt-get update && apt-get install inetutils-ping -y
-
