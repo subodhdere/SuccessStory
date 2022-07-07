@@ -19,7 +19,7 @@ For Ubuntu :
 
 # Docker Container Commands:
 
-* CID = container ID or name
+> Note: CID = container ID or name
 * docker container ls 				or		 ps
 * docker container ls -a 			or		 ps -a
 * docker container rm CID
