@@ -15,7 +15,7 @@ terraform plan
 terraform apply --auto-approve
 
 terraform destroy --auto-approve
-terraform destroy -target aws_instance.myec2![image](https://user-images.githubusercontent.com/32792363/178094835-1b92451a-45bf-41b4-ad4c-cffb6d41c12b.png)
+terraform destroy -target aws_instance.myec2
 
 Loading Variable Values from CLI
 terraform plan -var="instancetype=t2.small"
