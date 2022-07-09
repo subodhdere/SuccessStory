@@ -9,7 +9,6 @@ service docker status
 service docker start
 docker version
 systemctl enable docker
-```
 
 terraform init
 terraform plan
