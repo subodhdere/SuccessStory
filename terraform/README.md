@@ -1,15 +1,5 @@
 # SuccessStory
 
-## Terraform Installation
-
-For RHEL :
-```sh
-yum install docker -y   
-service docker status
-service docker start
-docker version
-systemctl enable docker
-
 terraform init
 terraform plan
 terraform apply --auto-approve
