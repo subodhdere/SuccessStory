@@ -3,10 +3,14 @@
 ```sh
 terraform init
 terraform plan
+terraform apply
 terraform apply --auto-approve
 
+terraform destroy
 terraform destroy --auto-approve
 terraform destroy -target aws_instance.myec2
+
+terraform refresh
 
 Loading Variable Values from CLI
 terraform plan -var="instancetype=t2.small"
