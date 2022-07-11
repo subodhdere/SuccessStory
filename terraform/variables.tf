@@ -1,4 +1,4 @@
-variable "instancetype" {
+variable "my_instance_type" {
   type = string
   default = "t2.micro"
 }
@@ -8,9 +8,11 @@ resource "aws_instance" "first_ec2_instance" {
   instance_type = var.my_instance_type
 }
 
-# terraform plan -var="instancetype=t2.small"
+# terraform plan -var="my_instance_type=t2.small"
 
 # File : terraform.tfvars
-# instancetype="t2.small"
+# my_instance_type="t2.small"
 
 # terraform plan -var-file="custom.tfvars"
+
+# setx TF_VAR_my_instance_type m5.large
