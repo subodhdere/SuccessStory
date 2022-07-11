@@ -1,5 +1,5 @@
 variable "my_instance_type" {
-  type = string
+  type = string #or number | list | map
   default = "t2.micro"
 }
 
