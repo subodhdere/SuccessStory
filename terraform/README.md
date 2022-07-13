@@ -32,6 +32,10 @@ terraform untaint aws_instance.myec2
 terraform fmt
 terraform validate
 
+terraform graph > graph.dot
+yum install graphviz
+cat graph.dot | dot -Tsvg > graph.svg
+
 terraform workspace -h
 terraform workspace show
 terraform workspace new dev
