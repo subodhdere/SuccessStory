@@ -110,11 +110,17 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 docker-compose up -d
+docker-compose up -d -f docker-compose2.yaml
 docker-compose down
+docker-compose down -v
+docker-compose build
+docker-compose up -d --build
+docker-compose images
 docker-compose up -d --scale web=3
 docker-compose ps
 docker-compose stop
 docker-compose start
+docker-compose restart
 docker-compose logs
 docker-compose top
 docker-compose rm
