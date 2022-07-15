@@ -5,6 +5,7 @@ provider "aws" {
 provider "aws" {
   region = "ap-southeast-1"
   alias  = "singapore"
+#  profile = "account2"
 }
 
 resource "aws_key_pair" "deployer_1" {
