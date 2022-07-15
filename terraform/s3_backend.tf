@@ -8,3 +8,5 @@ terraform {
 #    dynamodb_table = "s3-state-lock"
   }
 }
+
+# Note : The Dynamodb table must have a partition key named LockID with type of String
