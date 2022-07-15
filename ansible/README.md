@@ -4,11 +4,16 @@
 
 For RHEL :
 ```sh
+yum update
 yum install docker -y   
-service docker status
-service docker start
-docker version
-systemctl enable docker
+ansible --version
+```
+
+For Ubuntu :
+```sh
+apt update
+apt install ansible -y
+ansible --version
 ```
 
 ## Ansible Commands
