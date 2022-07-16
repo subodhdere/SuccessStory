@@ -39,10 +39,6 @@ cat graph.dot | dot -Tsvg > graph.svg
 terrafrom plan -refresh=false -target aws_instance.myec2
 
 terraform workspace -h
-terraform workspace show
-terraform workspace new dev
-terraform workspace list
-terraform workspace select dev
 
 Lifecycle
 createbeforedestroy = true
