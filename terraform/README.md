@@ -18,7 +18,7 @@ terraform plan -var="instancetype=t2.small"
 Loading from custom tfvars file
 terraform plan -var-file="custom.tfvars"
 
-export TF_LOG=TRACE
+export TF_LOG=TRACE # DEBUG, INFO, WARN, ERROR
 export TF_LOG_PATH=/tmp/crash.log
 
 terraform plan -out=demopath
