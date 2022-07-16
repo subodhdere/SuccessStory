@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-west-2"
+  region     = "ap-south-1"
   access_key = "YOUR-KEY"
   secret_key = "YOUR-KEY"
 }
@@ -22,3 +22,13 @@ variable "types" {
     ap-south-1 = "t2.small"
   }
 }
+
+# terraform plan -var="my_instance_type=t2.small"
+
+# File : terraform.tfvars
+# my_instance_type="t2.small"
+
+# terraform plan -var-file="custom.tfvars"
+
+# setx TF_VAR_my_instance_type m5.large
+Footer
