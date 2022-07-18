@@ -1,4 +1,4 @@
-##Module file
+# Module file
 variable instance_type {
   type = string
   default = "t2.micro"
@@ -9,8 +9,11 @@ resource "aws_instance" "myec2" {
   instance_type = var.instance_type
 }
 
-##Main file
+
+
+# Main file
 
 module "myfirstmodule" {
  source = "../myec2module"
+ instance_type = "t2.large"
 }
