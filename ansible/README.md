@@ -25,8 +25,8 @@ password ansadmin
 change shell to bash
 add user in /etc/sudoer file
 mkdir /home/ansadmin
-chown ansadmin:ansadmin /home/ansadmin/
 cp -r .profile .bashrc /home/ansadmin
+chown ansadmin:ansadmin /home/ansadmin/
 
 ssh-keygen
 authorized_keys
