@@ -18,6 +18,18 @@ ansible --version
 
 ## Ansible Commands
 ```sh
+
+####Setup controller and node server :
+useradd ansadmin
+password ansadmin
+change shell to bash
+add user in /etc/sudoer file
+mkdir /home/ansadmin
+chown ansadmin:ansadmin /home/ansadmin/
+cp -r .profile .bashrc /home/ansadmin
+
+ssh-keygen
+authorized_keys
 devops   ALL=(ALL) NOPASSWD: ALL
 
 ansible all -m ping
