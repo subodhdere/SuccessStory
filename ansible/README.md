@@ -23,14 +23,13 @@ ansible --version
 useradd ansadmin
 password ansadmin
 change shell to bash
-add user in /etc/sudoer file
+add user in /etc/sudoer file | ansadmin   ALL=(ALL) NOPASSWD: ALL
 mkdir /home/ansadmin
 cp -r .profile .bashrc /home/ansadmin
 chown ansadmin:ansadmin /home/ansadmin/
+generate keys using ssh-keygen
+copy .ssh/id_rsa.pub from controller to all node servers at .ssh/authorized_keys
 
-ssh-keygen
-authorized_keys
-devops   ALL=(ALL) NOPASSWD: ALL
 
 ansible all -m ping
 ansible all -m ping -i inventory
