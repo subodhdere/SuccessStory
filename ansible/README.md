@@ -19,7 +19,7 @@ ansible --version
 ## Ansible Commands
 ```sh
 
-####Setup controller and node server :
+#Setup controller and node server :
 useradd ansadmin
 password ansadmin
 change shell to bash
