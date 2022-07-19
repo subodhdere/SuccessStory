@@ -94,7 +94,7 @@ ansible all -m copy -a "content='Ansible\n' dest=/tmp/hosts backup=yes"
 
 ansible all -m fetch -a "src=/tmp/tmp1 dest=/home/devops/practice/"
 ansible all -m fetch -a "src=/tmp/tmp1 dest=/home/devops/practice/ flat=yes"
-ansible all -m fetch -a "src=/tmp/tmp1 dest=/home/devops/practice/{{inventory_hostname}} flat=yes"
+ansible all -m fetch -a "src=/tmp/tmp1 dest=/home/devops/practice/{{inventory_hostname}}/ flat=yes"
 
 ansible all -m file -a "path=/tmp/tmp2 state=touch" => value of state must be one of: absent, directory, touch
 ansible all -m file -a "path=/tmp/tmp3 state=touch mode=0777"
