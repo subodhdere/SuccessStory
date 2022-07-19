@@ -16,9 +16,9 @@ apt install ansible -y
 ansible --version
 ```
 
-## Ansible Commands
-```sh
+## Ansible Setup
 
+```sh
 #Setup controller and node server :
 useradd ansadmin
 password ansadmin
@@ -29,8 +29,10 @@ cp -r .profile .bashrc /home/ansadmin
 chown ansadmin:ansadmin /home/ansadmin/
 generate keys using ssh-keygen
 copy .ssh/id_rsa.pub from controller to all node servers at .ssh/authorized_keys
+```
 
-
+## Ansible Commands
+```sh
 ansible all -m ping
 ansible all -m ping -i inventory
 ansible host -m ping => host must be present in inventory files
