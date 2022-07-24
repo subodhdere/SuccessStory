@@ -21,7 +21,7 @@ ansible --version
 ```sh
 #Setup controller and node server :
 useradd ansadmin
-password ansadmin
+passwd ansadmin
 change shell to bash
 add user in /etc/sudoer file | ansadmin   ALL=(ALL) NOPASSWD: ALL
 mkdir /home/ansadmin
