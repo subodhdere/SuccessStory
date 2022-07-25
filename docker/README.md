@@ -24,6 +24,8 @@ systemctl enable docker
 ## Docker Container
 > Note: CID = container ID or name
 ```sh
+docker info
+docker system df
 docker container ls or ps
 docker container ls -a or ps -a
 docker container rm CID
@@ -39,6 +41,11 @@ docker container prune  => to delete stopped containers
 docker container ls -aq => to list all container id
 docker container inspect <container_id or name>
 docker image inspect <image_id>
+docker search nginx
+docker events
+docker stats
+docker container commit CID newImage
+docker image history nginx
 
 docker container cp file_name container_id@path
 docker container cp index.html mynginxContainer:/usr/share/nginx/html/index.html
@@ -48,13 +55,18 @@ docker container run -d --name subodhContainer nginx => create container in deta
 docker container stop `docker container ps -q` => to stop all running containers
 docker container rm `docker container ps -aq` => to delete all stopped containers
 
-docker container export cid > myimage.tar
-docker image import myimage.tar mycustomimage
-docker container run -d mycustomimage bash
+docker image save nginx_figlet > nginx_figlet.tar
+docker image load -i nginx_figlet.tar
 
 docker container -d -p <host_port>:<container_port> nginx 
 docker container run -d -p 3456:8080 kodekloud/webapp-color
 docker container run -d -e APP_COLOR=red kodekloud/webapp-color
+
+restart policy : 
+	no (default)
+	on-failure - only on failure, it wl restart | we can set max retries as well
+	always - if I kill PID, then need to restart docker daemon to bring this container up
+	unless-stopped - if I kill PID, container wl come up automatically
 ```
 
 ## Dockerfile
@@ -80,6 +92,8 @@ docker volume rm => Remove one or more volumes
 docker container run -d --name c1 -v /data01 nginx => Anonymous volume
 docker container run -d --name c1 -v mynginxvolume:/data01 nginx => Named volume
 docker container run -d --name c1 -v /root/learnDocker:/tmp nginx => Host or Bind volume
+docker container run -d -v abcd:/tmp:ro --name c2 nginx #read only volumes
+docker container run -d --volumes-from c1 --name c2 nginx
 ```
 
 ## Docker Network
