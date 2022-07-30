@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "1234:80"
+=================
+version: "3"
+services:
+  frontend:
+    image: awesome/webapp
+    build: ./webapp
+
+  backend:
+    image: awesome/database
+    build:
+      context: backend
+      dockerfile: ../backend.Dockerfile
