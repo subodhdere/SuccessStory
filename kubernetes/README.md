@@ -7,7 +7,7 @@ alias c=clear
 alias h=history
 complete -F __start_kubectl k
 source <(kubectl completion bash)
-export PS1="\e[0;32m \n\W > \e[0m"
+export PS1="\e[0;36m \n\W > \e[0m"
 ```
 
 # Commands :
