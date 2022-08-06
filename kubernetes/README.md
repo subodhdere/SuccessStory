@@ -18,6 +18,7 @@ kubectl create -f <file_name>.yaml
 kubectl apply -f <file_name>.yaml
 kubectl apply -f ./my1.yaml -f ./my2.yaml
 kubeadm token create --print-join-command    => to join worker node to master node
+```
 
 ## Node
 
