@@ -60,6 +60,7 @@ minikube service <service_name> --url
 k exec bz1 -- nslookup 192-168-41-151.default.pod
 kubectl edit svc <service_name>
 kubectl delete svc <service_name>
+curl mysvc.default.svc.cluster.local
 ```
 
 ## ReplicaSet
