@@ -100,9 +100,6 @@ Note : Edit metrics server deployment with below to ignore ssl
 ```sh
 kubectl create cm <cm_name> --from-literal city=pulgaon
 kubectl create cm <cm_name> --from-env-file <file_name>
-kubectl create cm <cm_name> --from-file <file_name>
-kubectl create cm <cm_name> --from-file <file_name> --from-file <file_name>
-kubectl create cm <cm_name> --from-file <dir_name>
 kubectl create cm <cm_name> --from-literal city=pulgaon --dry-run=client -o yaml
 kubectl get cm
 kubectl describe cm <cm_name>
@@ -114,9 +111,6 @@ kubectl delete cm <cm_name>
 ```sh
 kubectl create secret generic <secret_name> --from-literal city=pulgaon
 kubectl create secret generic <secret_name> --from-env-file <file_name>
-kubectl create secret generic <secret_name> --from-file <file_name>
-kubectl create secret generic <secret_name> --from-file <file_name> --from-file <file_name>
-kubectl create secret generic <secret_name> --from-file <dir_name>
 kubectl create secret generic <secret_name> --from-literal city=pulgaon --dry-run=client -o yaml
 kubectl get secret
 kubectl describe secret <secret_name>
