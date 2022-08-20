@@ -168,17 +168,17 @@ kubectl create clusterrolebinding crb1 --clusterrole cr1 --user santosh
 ## Config
 ```sh
 openssl genrsa -out santosh.key 2048
-openssl req -new -key santosh.key -out santosh.csr -subj "/CN=subodh/O=devops"
+openssl req -new -key santosh.key -out santosh.csr -subj "/CN=santosh/O=devops"
 scp root@kmaster:/etc/kubernetes/pki/ca.{crt,key} .
-openssl x509 -req -in subodh.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out subodh.crt -days 365
-kubectl --kubeconfig subodh.kubeconfig config set-cluster kubernetes --server https://172.16.16.100:6443 --certificate-authority=ca.crt
-kubectl --kubeconfig subodh.kubeconfig config set-credentials subodh --client-certificate subodh.crt --client-key subodh.key
-kubectl --kubeconfig subodh.kubeconfig config set-context subodh-kubernetes --user subodh --cluster kubernetes
-kubectl config use-context subodh-kubernetes --kubeconfig santosh.kubeconfig
-kubectl auth can-i create pod -n test --kubeconfig subodh.kubeconfig
+openssl x509 -req -in santosh.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out santosh.crt -days 365
+kubectl --kubeconfig santosh.kubeconfig config set-cluster kubernetes --server https://172.16.16.100:6443 --certificate-authority=ca.crt
+kubectl --kubeconfig santosh.kubeconfig config set-credentials subodh --client-certificate santosh.crt --client-key santosh.key
+kubectl --kubeconfig santosh.kubeconfig config set-context santosh-kubernetes --user santosh --cluster kubernetes
+kubectl config use-context santosh-kubernetes --kubeconfig santosh.kubeconfig
+kubectl auth can-i create pod -n test --kubeconfig santosh.kubeconfig
 kubectl create role role1 -n test --verb create,list,delete --resource pod
-kubectl create rolebinding rb1 -n test --role role1 --user subodh
-kubectl get pod -n test --kubeconfig subodh.kubeconfig
+kubectl create rolebinding rb1 -n test --role role1 --user santosh
+kubectl get pod -n test --kubeconfig santosh.kubeconfig
 ```
         
 ## Scheduling
