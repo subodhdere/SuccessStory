@@ -172,7 +172,7 @@ openssl req -new -key santosh.key -out santosh.csr -subj "/CN=santosh/O=devops"
 scp root@kmaster:/etc/kubernetes/pki/ca.{crt,key} .
 openssl x509 -req -in santosh.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out santosh.crt -days 365
 kubectl --kubeconfig santosh.kubeconfig config set-cluster kubernetes --server https://172.16.16.100:6443 --certificate-authority=ca.crt
-kubectl --kubeconfig santosh.kubeconfig config set-credentials subodh --client-certificate santosh.crt --client-key santosh.key
+kubectl --kubeconfig santosh.kubeconfig config set-credentials santosh --client-certificate santosh.crt --client-key santosh.key
 kubectl --kubeconfig santosh.kubeconfig config set-context santosh-kubernetes --user santosh --cluster kubernetes
 kubectl config use-context santosh-kubernetes --kubeconfig santosh.kubeconfig
 kubectl auth can-i create pod -n test --kubeconfig santosh.kubeconfig
