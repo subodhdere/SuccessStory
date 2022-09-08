@@ -5,7 +5,7 @@
 For RHEL :
 ```sh
 yum update
-yum install docker -y   
+yum install ansible -y   
 ansible --version
 ```
 
