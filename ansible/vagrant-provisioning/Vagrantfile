@@ -1,0 +1,69 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+
+Vagrant.configure(2) do |config|
+
+  config.vm.provision "shell", path: "bootstrap_ansible.sh"
+
+  # Kubernetes Master Server
+  config.vm.define "controller" do |node|
+  
+    node.vm.box               = "generic/ubuntu2004"
+    node.vm.box_check_update  = false
+    node.vm.box_version       = "3.3.0"
+    node.vm.hostname          = "controller.example.com"
+
+    node.vm.network "private_network", ip: "172.16.16.100"
+  
+    node.vm.provider :virtualbox do |v|
+      v.name    = "controller"
+      v.memory  = 1024
+      v.cpus    =  1
+    end
+  
+    node.vm.provider :libvirt do |v|
+      v.memory  = 1024
+      v.nested  = true
+      v.cpus    = 1
+    end
+  
+    node.vm.provision "shell", path: "bootstrap_kmaster_ans.sh"
+  
+  end
+
+
+  # Kubernetes Worker Nodes
+  NodeCount = 1
+
+  (1..NodeCount).each do |i|
+
+    config.vm.define "node" do |node|
+
+      node.vm.box               = "generic/ubuntu2004"
+      node.vm.box_check_update  = false
+      node.vm.box_version       = "3.3.0"
+      node.vm.hostname          = "node.example.com"
+
+      node.vm.network "private_network", ip: "172.16.16.10#{i}"
+
+      node.vm.provider :virtualbox do |v|
+        v.name    = "node"
+        v.memory  = 1024
+        v.cpus    = 1
+      end
+
+      node.vm.provider :libvirt do |v|
+        v.memory  = 1024
+        v.nested  = true
+        v.cpus    = 1
+      end
+
+      node.vm.provision "shell", path: "bootstrap_kworker_ans.sh"
+
+    end
+
+  end
+
+end
