@@ -32,18 +32,14 @@ terraform untaint aws_instance.myec2
 terraform fmt
 terraform validate
 
-terraform graph > graph.dot
-yum install graphviz
-cat graph.dot | dot -Tsvg > graph.svg
-
 terrafrom plan -refresh=false -target aws_instance.myec2
 
 terraform workspace -h
 
 Lifecycle
-createbeforedestroy = true
-preventdestroy = true
-ignorechanges = true
+create_before_destroy = true
+prevent_destroy = true
+ignore_changes = true
 
 terraform get
 terraform import
