@@ -30,7 +30,7 @@ provisioner "remote-exec" {
 resource "aws_instance" "myec2" {
    ami = "ami-082b5a644766e0e6f"
    instance_type = "t2.micro"
-   key_name = "kplabs-terraform"
+   key_name = "demo-terraform"
    vpc_security_group_ids  = [aws_security_group.allow_ssh.id]
 
    provisioner "remote-exec" {
@@ -42,7 +42,7 @@ resource "aws_instance" "myec2" {
    connection {
      type = "ssh"
      user = "ec2-user"
-     private_key = file("./kplabs-terraform.pem")
+     private_key = file("./demo-terraform.pem")
      host = self.public_ip
    }
    }
