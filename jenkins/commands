@@ -1,5 +1,6 @@
 Jenkins:
-=======================================================================
+========
+
 Java application
 Platform independent
 Used for CICD
@@ -7,14 +8,23 @@ Create new uses + Manage + Assign Roles
   Role-based Authorization StrategyVersion Plugin
   Configure Global Security
   Manage & Assign Role
-Nodes
-Trigger build remotely  
-job1 -> job2
-Parameterized Build
-Build Monitor Plugin
+
+=======================================================================
+
+Kmaster:
+apt install openjdk-11-jdk -y
+apt install docker.io
+apt install python3-pip -y
+pip install docker
+apt install net-tools
+apt install ansible -y
+
 =======================================================================
 
 Install Jenkins : On jenkins server
+
+kmaster => k8s cluster
+kworker1 => install jenkins
 
 Ubuntu :
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
@@ -24,9 +34,11 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-apt-get update
+apt update
 apt install ca-certificates
-apt-get install jenkins
+apt update
+apt install openjdk-11-jdk -y
+apt install jenkins -y
 
 Redhat :
 wget -O /etc/yum.repos.d/jenkins.repo \
@@ -41,24 +53,44 @@ Default Port : 8080
 
 =======================================================================
 
+Tasks:
+Add Slave node
+NodeJSDemo Pipeline
+Trigger build remotely  
+job1 -> job2
+Parameterized Build
+Build Monitor Plugin
+
+=======================================================================
+
+Plugins:
+GitHub
+Maven Integration
+Deploy to Container => for tomcat
+Publish Over SSH => for docker container
+  usermod -aG docker dockeradmin
+SSH Agent Plugin
+
+=======================================================================
+
 Install Maven : On jenkins server
 
 cd /opt
-wget https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.tar.gz
+wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
 
 export M2_HOME=/opt/maven
 export M2=/opt/maven/bin
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-set PATH varaible
+export PATH=$PATH:$M2_HOME:$M2:$JAVA_HOME
 
 =======================================================================
 
 Install Tomcat : On remote server
 
 cd /opt
-wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.78/bin/apache-tomcat-8.5.78.tar.gz
+wget https://archive.apache.org/dist/tomcat/tomcat-10/v10.0.8/bin/apache-tomcat-10.0.8.tar.gz
 
-tomcat-user.xml :
+tomcat-users.xml :
  <role rolename="manager-gui"/>
  <role rolename="manager-script"/>
  <role rolename="manager-jmx"/>
@@ -71,15 +103,41 @@ Default Port : 8080
 
 =======================================================================
 
-Install java : on jenkins and tomcat server
+DEPLOY TO DOCKER CONTAINER
 
-apt-get install openjdk-11-jdk
+dockeradmin@kmaster:/opt/build$ cat Dockerfile
+FROM tomcat:latest
+RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
+COPY ./*.war /usr/local/tomcat/webapps
+
+Pipeline Script:
+cd /opt/build;
+docker container stop demo-app-container;
+docker container rm demo-app-container;
+docker image build -t subodhdere/demo-app:$BUILD_NUMBER .;
+docker container run -d --name demo-app-container -p 1234:8080 subodhdere/demo-app:$BUILD_NUMBER;
+
+With Ansible:
+cd /opt/build;
+ansible-playbook push_image_to_dockerhub.yaml -e "BUILD_NUMBER=$BUILD_NUMBER";
+ansible-playbook deploy_on_docker_container.yaml -e "BUILD_NUMBER=$BUILD_NUMBER";
 
 =======================================================================
 
-Publish Over SSH plugin to copy artifacts to remote server
-GitHub Plugin for Jenkins
-Maven Integration plugin
-Deploy to container
+DEPLOY TO KUBERNETES
 
-=======================================================================
+Install helm:
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+helm create mytom => then update helm chart accirding to requirement
+    Files to udpate:
+        mytom/values.yaml
+        mytom/templates/deployment.yaml
+        mytom/templates/service.yaml
+
+Pipeline Script:
+cd /opt/build;
+ansible-playbook push_image_to_dockerhub.yaml -e "BUILD_NUMBER=$BUILD_NUMBER";
+ansible-playbook deploy_on_k8s.yaml -e "BUILD_NUMBER=$BUILD_NUMBER";
