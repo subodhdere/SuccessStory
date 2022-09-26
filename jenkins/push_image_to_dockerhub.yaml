@@ -1,29 +1,18 @@
+#push_image_to_dockerhub.yaml
 ---
 - hosts: all
   gather_facts: no
   tasks:
-  - name: delete docker image
-    command: docker image rm mytom
-    ignore_errors: yes
-
   - name: create docker image
-    command: docker image build -t mytom .
+    command: docker image build -t subodhdere/mytom:{{BUILD_NUMBER}} .
     args:
-      chdir: /opt/docker
-
-  - name: tag docker image
-    command: docker image tag mytom subodhdere77/mytom:{{BUILD_NUMBER}}
+      chdir: /opt/build
 
   - name: Log into DockerHub
     docker_login:
-      username: subodhdere77
+      username: subodhdere
       password: Dummypass@11
       email: subodh.dere.7@gmail.com
 
   - name: push docker image
-    command: docker image push subodhdere77/mytom:{{BUILD_NUMBER}}
-
-  - name: change tag in helm chart
-    command: sh /opt/docker/change_tag.sh {{BUILD_NUMBER}}
-    tags:
-    - never
+    command: docker image push subodhdere/mytom:{{BUILD_NUMBER}}
