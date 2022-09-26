@@ -1,6 +1,7 @@
+#deploy_on_k8s.yaml
 ---
 - hosts: all
   gather_facts: no
   tasks:
   - name: deploy using helm chart
-    command: helm upgrade --install tom /opt/docker/mytom/
+    command: helm upgrade --install tom /opt/build/mytom/ --set image.tag={{BUILD_NUMBER}}
