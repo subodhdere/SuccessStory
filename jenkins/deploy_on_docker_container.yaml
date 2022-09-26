@@ -1,3 +1,4 @@
+#deploy_on_docker_container.yaml
 ---
 - hosts: all
   gather_facts: no
@@ -11,8 +12,8 @@
     ignore_errors: yes
 
   - name: remove image
-    command: docker image rm subodhdere77/mytom:{{BUILD_NUMBER}}
+    command: docker image rm subodhdere/mytom:{{BUILD_NUMBER}}
     ignore_errors: yes
 
   - name: create container c1
-    command: docker container run -d --name c1 -p 8888:8080 subodhdere77/mytom:{{BUILD_NUMBER}}
+    command: docker container run -d --name c1 -p 8888:8080 subodhdere/mytom:{{BUILD_NUMBER}}
