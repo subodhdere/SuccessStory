@@ -4,10 +4,6 @@ Jenkins:
 Java application
 Platform independent
 Used for CICD
-Create new uses + Manage + Assign Roles
-  Role-based Authorization StrategyVersion Plugin
-  Configure Global Security
-  Manage & Assign Role
 
 =======================================================================
 
@@ -45,21 +41,30 @@ wget -O /etc/yum.repos.d/jenkins.repo \
     https://pkg.jenkins.io/redhat-stable/jenkins.repo
 rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 yum upgrade
-yum install java-11-openjdk
-yum install jenkins
+yum install java-11-openjdk  | amazon-linux-extras install java-openjdk11 -y
+yum install jenkins -y
 systemctl daemon-reload
-
+systemctl start jenkins
+systemctl enable jenkins
 Default Port : 8080
 
 =======================================================================
 
 Tasks:
-Add Slave node
-NodeJSDemo Pipeline
-Trigger build remotely  
-job1 -> job2
-Parameterized Build
-Build Monitor Plugin
+1. Add Slave node
+2. Webhook => Plugin: Multibranch scan Webhook Trigger | <jenkins_url>/github-wehbook/
+3. Trigger build remotely | Plugin: Build Authorization Token Root
+   http://<jenkins_url>/buildByToken/build?job=<jobname>\&token=<tokenname>
+4. Parameterized Build
+5. NodeJSDemo Pipeline
+      usermod -aG docker jenkins
+      newgrp docker
+      systemctl restart jenkins
+6. Jenkinsfile
+7. Multibranch Pipeline
+8. Email Notification | smtp.gmail.com | port: 465
+9. User Creation | Role based Authorization Plugin
+10. Use Private Git Repository
 
 =======================================================================
 
@@ -130,6 +135,16 @@ Install helm:
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
+
+helm repo list
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm install mytom mytom/
+hemin upgrade mytom mytom/
+helm rollback mytom 1
+heml uninstall mytom
+
+helm list
 
 helm create mytom => then update helm chart accirding to requirement
     Files to udpate:
