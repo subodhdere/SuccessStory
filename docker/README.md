@@ -25,7 +25,6 @@ systemctl enable docker
 > Note: CID = container ID or name
 ```sh
 docker info
-docker system df
 docker container ls or ps
 docker container ls -a or ps -a
 docker container rm CID
@@ -41,8 +40,6 @@ docker container prune  => to delete stopped containers
 docker container ls -aq => to list all container id
 docker container inspect <container_id or name>
 docker image inspect <image_id>
-docker search nginx
-docker events
 docker stats
 docker container commit CID newImage
 docker image history nginx
@@ -62,11 +59,6 @@ docker container -d -p <host_port>:<container_port> nginx
 docker container run -d -p 3456:8080 kodekloud/webapp-color
 docker container run -d -e APP_COLOR=red kodekloud/webapp-color
 
-restart policy : 
-	no (default)
-	on-failure - only on failure, it wl restart | we can set max retries as well
-	always - if I kill PID, then need to restart docker daemon to bring this container up
-	unless-stopped - if I kill PID, container wl come up automatically
 ```
 
 ## Dockerfile
@@ -92,8 +84,6 @@ docker volume rm => Remove one or more volumes
 docker container run -d --name c1 -v /data01 nginx => Anonymous volume
 docker container run -d --name c1 -v mynginxvolume:/data01 nginx => Named volume
 docker container run -d --name c1 -v /root/learnDocker:/tmp nginx => Host or Bind volume
-docker container run -d -v abcd:/tmp:ro --name c2 nginx #read only volumes
-docker container run -d --volumes-from c1 --name c2 nginx
 ```
 
 ## Docker Network
@@ -105,15 +95,15 @@ docker network inspect => Display detailed information on one or more networks
 docker network ls	=> List networks
 docker network prune => Remove all unused networks
 docker network rm	=> Remove one or more networks
-docker network create app1
-docker run -d --network=app1 –name c1 nginx
-docker network create app2
-docker run -d --network=app2 –name c2 nginx
+docker network create mybridge1
+docker run -d --network=mybridge1 –name c1 nginx
+docker network create mybridge2
+docker run -d --network=mybridge2 –name c2 nginx
 docker container run -d --network host –name c1 nginx
 docker container run -d --network none –name c2 nginx
 docker container inspect c1
 Install ping inside container:
-apt-get update && apt-get install inetutils-ping -y
+apt update && apt install inetutils-ping -y && apt install net-tools -y
 ```
 
 ## Docker Compose
