@@ -5,26 +5,37 @@
 For RHEL :
 ```sh
 yum install docker -y   
-service docker status
-service docker start
+systemctl status docker
+systemctl start docker
 docker version
 systemctl enable docker
 ```
 
 For Ubuntu :
 ```sh
-apt-get update
-apt-get install docker.io -y   
-service docker status
-service docker start
+apt update
+apt install docker.io -y   
+systemctl status docker
+systemctl start docker
 docker version
 systemctl enable docker
+```
+
+```sh
+Setup terminal
+==============
+export PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\n~ > "
 ```
 
 ## Docker Container
 > Note: CID = container ID or name
 ```sh
 docker info
+docker image pull nginx
+docker image ls
+docker container run nginx => create container in atached mode with random name
+docker container run -d nginx => create container in detached mode with random name
+docker container run -d --name c1 nginx => create container in detached mode with container name as c1
 docker container ls or ps
 docker container ls -a or ps -a
 docker container rm CID
@@ -47,31 +58,44 @@ docker image history nginx
 docker container cp file_name container_id@path
 docker container cp index.html mynginxContainer:/usr/share/nginx/html/index.html
 
-docker container run -d --name subodhContainer nginx => create container in detached mode with container name as subodhContainer
-
-docker container stop `docker container ps -q` => to stop all running containers
-docker container rm `docker container ps -aq` => to delete all stopped containers
+docker container stop $(docker container ps -aq) => to stop all running containers
+docker container rm $(docker container ps -aq) => to delete all stopped containers
 
 docker image save nginx_figlet > nginx_figlet.tar
-docker image load -i nginx_figlet.tar
+docker image load -i nginx_figlet.tar OR docker image load < nginx_figlet.tar
 
 docker container -d -p <host_port>:<container_port> nginx 
-docker container run -d -p 3456:8080 kodekloud/webapp-color
-docker container run -d -e APP_COLOR=red kodekloud/webapp-color
+docker container run -d -p 1234:80 nginx
 
+useradd user1
+usermod -aG docker user1
+su - user1
+docker container ps
 ```
 
 ## Dockerfile
 ```sh
+Istructions: 
+    FROM
+    RUN
+    COPY
+    ADD
+    USER
+    WORKDIR
+    ENV
+    EXPOSE
+    ENTRYPOINT
+    CMD
 docker image build -t mynginx .
 docker image build -t mynginx -f mydockerfile .
+docker image history nginx
 ```
 
 ## Push to DockerHub
 ```sh
 docker login
-docker image tag myImage subodhdere/imageName:v1
-docker image push subodhdere/imageName:v1
+docker image tag myImage subodhdere/imagename:v1
+docker image push subodhdere/imagename:v1
 ```
 
 ## Docker Volume
@@ -103,7 +127,7 @@ docker container run -d --network host –name c1 nginx
 docker container run -d --network none –name c2 nginx
 docker container inspect c1
 Install ping inside container:
-apt update && apt install inetutils-ping -y && apt install net-tools -y
+apt update && apt install inetutils-ping -y && apt install net-tools -y && apt install procps -y
 ```
 
 ## Docker Compose
@@ -131,4 +155,12 @@ docker-compose rm
 docker-compose rm -s
 docker-compose rm -f -s
 docker-compose kill
+```
+
+## Package Installation:
+```sh
+netstat : apt install net-tools
+ping : apt install inetutils-ping -y
+ps : apt install procps
+nslookup : apt install dnsutils
 ```
