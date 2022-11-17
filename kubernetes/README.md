@@ -163,6 +163,7 @@ kubectl describe rolebinding <rolebinding_name>
 kubectl delete rolebinding <rolebinding_name>
 kubectl create clusterrole cr1 --verb list --resource pod
 kubectl create clusterrolebinding crb1 --clusterrole cr1 --user santosh
+root@p1:/run/secrets/kubernetes.io/serviceaccount# curl -k -H "Authorization: Bearer $TOKEN" "https://kubernetes/api/v1/naespaces/default/pods"
 ```
   
 ## Config
