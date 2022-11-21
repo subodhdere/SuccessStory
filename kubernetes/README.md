@@ -44,6 +44,7 @@ kubectl exec -it nginx-pod -- bash
 kubectl delete pod nginx-podd
 kubectl run nginx-pod --image nginx --dry-run=client
 kubectl run nginx-pod --image nginx --dry-run=client -o yaml
+kubectl run nginx-port --image=nginx --port=80
 kubectl apply -f pod.yaml
 kubectl delete -f pod.yaml
 ```
@@ -94,6 +95,11 @@ Note : Edit metrics server deployment with below to ignore ssl
     command:
     - /metrics-server
     - --kubelet-insecure-tls
+
+while :
+do
+    curl kmaster:30007
+done
 ```
   
 ## ConfigMap
@@ -120,10 +126,26 @@ kubectl create secret docker-registry regcred --docker-server=https://index.dock
 kubectl delete secret <secret_name>
 ```
 
+```sh
+## Static Pod
+ps -ef | grep kubelet
+~ > cat /var/lib/kubelet/config.yaml | grep static
+staticPodPath: /etc/kubernetes/manifests
+```
+
 ## Ingress
 ```sh
+C:\Windows\System32\drivers\etc\hosts
+export PS1="\n\[\e[36m\][\u.\h]\[\e[0m\] \[\e(0\]b\[\e(B\] "
 minikube addons enable ingress
 kubectl get ingress
+```
+
+```sh
+Authentication
+==============
+curl -k https://172.16.16.100:6443/api/v1 --header "Authorization: Bearer token"
+curl -k https://172.16.16.100:6443/api/v1/namespaces/default/pods --header "Authorization: Bearer token"
 ```
 
 ## ResourceQuota
@@ -184,6 +206,16 @@ kubectl get pod -n test --kubeconfig santosh.kubeconfig
         
 ## Scheduling
 ```sh
+Generate cluster join command
+kubeadm token create --print-join-command
 kubectl taint node minikube subodh=dere:NoSchedule|PreferNoSchedule|NoExecute
 kubectl taint node minikube subodh=dere:NoSchedule-
+```
+
+## Package Installation
+```sh
+netstat : apt install net-tools
+ping : apt install inetutils-ping -y
+ps : apt install procps -y
+nslookup : apt install dnsutils -y
 ```
