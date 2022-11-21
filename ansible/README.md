@@ -2,13 +2,6 @@
 
 ## Ansible Installation
 
-For RHEL :
-```sh
-yum update
-yum install ansible -y   
-ansible --version
-```
-
 For Ubuntu :
 ```sh
 apt update
@@ -16,18 +9,21 @@ apt install ansible -y
 ansible --version
 ```
 
+For RHEL :
+```sh
+yum update
+yum install ansible -y   
+ansible --version
+```
+
 ## Ansible Setup
 
 ```sh
 #Setup controller and node server :
-useradd ansadmin
-passwd ansadmin
-change shell to bash
+useradd ansadmin -p ansadmin -m -s /bin/bash
 add user in /etc/sudoer file | ansadmin   ALL=(ALL) NOPASSWD: ALL
-mkdir /home/ansadmin
-cp -r .profile .bashrc /home/ansadmin
-chown ansadmin:ansadmin /home/ansadmin/
-generate keys using ssh-keygen
+Switch to ansadmin user | su - ansadmin
+generate keys | ssh-keygen
 copy .ssh/id_rsa.pub from controller to all node servers at .ssh/authorized_keys
 ```
 
@@ -41,12 +37,12 @@ ansible group1:group2 -m ping
 hostKeyChecking => disable
 
 ============================================
-devops@kmaster:~/practice$ cat hosts  | head
+ansadmin@kmaster:~/practice$ cat hosts  | head
 [group1]
-kmaster
+controller
 
 [group2]
-kworker1
+node
 
 [parentgroup:children]
 group1
@@ -60,10 +56,10 @@ ansible.cfg priority
 3.    ~/.ansible.cfg
 4.    /etc/ansible/ansible.cfg
 
-devops@kmaster:~/practice$ ansible --version
+ansadmin@controller:~/practice$ ansible --version
 ansible 2.9.6
-  config file = /home/devops/practice/ansible.cfg
-  configured module search path = ['/home/devops/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  config file = /home/ansadmin/practice/ansible.cfg
+  configured module search path = ['/home/ansadmin/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python3/dist-packages/ansible
   executable location = /usr/bin/ansible
   python version = 3.8.10 (default, Jun  2 2021, 10:49:15) [GCC 9.4.0]
@@ -76,25 +72,23 @@ ansible-doc ping
 
 ============================================
 ANSIBLE_KEEP_REMOTE_FILES=1 ansible all -m shell -a "free -m"
-devops@kworker1:~/.ansible/tmp$ ls -alrt
-total 8
-drwx------ 3 devops devops 4096 Mar  6 10:23 ..
-drwx------ 2 devops devops 4096 Mar  6 11:14 .
+ansadmin@node:~$ ls -l .ansible/tmp/ansible-tmp-1669023569.0811205-130174631212897/AnsiballZ_command.py
+-rwx------ 1 ansadmin ansadmin 115460 Nov 21 09:39 .ansible/tmp/ansible-tmp-1669023569.0811205-130174631212897/AnsiballZ_command.py
 ============================================
 
 ============================================
 Parallel:
 ansible all -m shell -a "sleep 5"
-devops@kmaster:~/practice$ grep fork /etc/ansible/ansible.cfg
+ansadmin@controller:~/practice$ grep fork /etc/ansible/ansible.cfg
 #forks          = 5
 
-devops@kmaster:~/practice$ ansible all -m shell -a "sleep 5; echo hi"
-kmaster | CHANGED | rc=0 >>
+ansadmin@controller:~/practice$ ansible all -m shell -a "sleep 5; echo hi"
+controller | CHANGED | rc=0 >>
 hi
-kworker1 | CHANGED | rc=0 >>
+node | CHANGED | rc=0 >>
 hi
 
-devops@kmaster:~/practice$ cat ansible.cfg
+ansadmin@controller:~/practice$ cat ansible.cfg
 [defaults]
 inventory      = ./hosts
 host_key_checking = False
@@ -124,20 +118,6 @@ ansible all -m apt -a "name=git state=present" -b  => present | absent | latest
 Facts - Information about managed nodes like os dist, releaes, processor etc
 ansible all -m setup
 ansible all -m setup -a "filter=ansible_all_ipv4_addresses"
-Types : Default Facts & Custom Facts
-Custom Facts Creation steps:
-1. Create /etc/ansible/facts.d directory
-2. Create custom facts file with ext .fact inside above directory
-3. Output of above file should be in json format with executable permission
-
-devops@kworker1:/etc/ansible/facts.d$ cat git.fact
-#!/bin/bash
-git_version=`git --version | awk '{print $3}'`
-cat << EOF
-{ "Git_Version": "$git_version" }
-EOF
-
-ansible all -m setup -a "filter=ansible_local"
 ====================================
 
 ====================================
@@ -145,7 +125,7 @@ Check for raw modules
 If python is not installed on managed node
 
 ansible all -m raw -a "uptime"
-ansible all -m raw -a "scp /home/devops/practice/1 devops@kworker1:/tmp"
+ansible all -m raw -a "scp /home/ansadmin/practice/1 ansadmin@node:/tmp"
 ============================================
 
 ============================================
@@ -160,11 +140,11 @@ ansible all -m file -a "path=1 state=touch" -k  # Or --ask-pass
 ansible all -m file -a "path=1 state=touch" -k -u newuser
 
 ============================================
-devops@kmaster:~/practice$ cat hosts  | head
-kworker1 ansible_ssh_pass=devops
+ansadmin@controller:~/practice$ cat hosts  | head
+node ansible_ssh_pass=devops
 
 [group1]
-kworker1
+node
 
 [group1:vars]
 ansible_ssh_user=devops
@@ -189,21 +169,4 @@ ansible-vault rekey 1.yaml
 ansible-playbook 1.yaml --ask-vault-pass
 ansible-playbook 1.yaml --vault-password-file mypass
 ============================================
-
-============================================
-BLOCK
-
-block:
-  task1
-  task2
-ansible_os_family = Debian
-become= yes
-
-block:
-  task3
-  task4
-ansible_os_family = Redhat
-become= yes
-============================================
-
 ```
