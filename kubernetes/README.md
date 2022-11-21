@@ -126,8 +126,8 @@ kubectl create secret docker-registry regcred --docker-server=https://index.dock
 kubectl delete secret <secret_name>
 ```
 
-```sh
 ## Static Pod
+```sh
 ps -ef | grep kubelet
 ~ > cat /var/lib/kubelet/config.yaml | grep static
 staticPodPath: /etc/kubernetes/manifests
@@ -141,9 +141,8 @@ minikube addons enable ingress
 kubectl get ingress
 ```
 
+## Authentication
 ```sh
-Authentication
-==============
 curl -k https://172.16.16.100:6443/api/v1 --header "Authorization: Bearer token"
 curl -k https://172.16.16.100:6443/api/v1/namespaces/default/pods --header "Authorization: Bearer token"
 ```
