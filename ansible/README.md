@@ -99,10 +99,6 @@ ansible all -m copy -a "src=./hosts dest=/tmp"
 ansible all -m copy -a "content='Ansible\n' dest=/tmp/hosts" => File will be create if not present
 ansible all -m copy -a "content='Ansible\n' dest=/tmp/hosts backup=yes"
 
-ansible all -m fetch -a "src=/tmp/tmp1 dest=./"
-ansible all -m fetch -a "src=/tmp/tmp1 dest=./ flat=yes"
-ansible all -m fetch -a "src=/tmp/tmp1 dest=./{{inventory_hostname}}/ flat=yes"
-
 ansible all -m file -a "path=/tmp/tmp2 state=touch" => value of state must be one of: absent, directory, touch
 ansible all -m file -a "path=/tmp/tmp3 state=touch mode=0777"
 ansible all -m file -a "path=/etc/etc1 state=touch" => Permission denied
@@ -155,10 +151,6 @@ ansible_ssh_user=devops1
 ansible_ssh_pass=devops1
 ============================================
 
-any_errors_fatal: true
-strategy: linear -- by default  OR "free" if needed
-
-============================================
 ansible-vault -h
 ansible-vault create 1.yaml
 ansible-vault decrypt 1.yaml
