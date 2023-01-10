@@ -7,9 +7,22 @@ Used for CICD
 
 =======================================================================
 
+EC2
+===
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install java-11-openjdk
+sudo yum install jenkins -y
+sudo systemctl daemon-reload
+
+=======================================================================
+
 Kmaster:
 apt install openjdk-11-jdk -y
-apt install docker.io
+apt install docker.io -y
 apt install python3-pip -y
 pip install docker
 apt install net-tools
@@ -19,7 +32,6 @@ apt install ansible -y
 
 Install Jenkins : On jenkins server
 
-kmaster => k8s cluster
 kworker1 => install jenkins
 
 Ubuntu :
@@ -30,8 +42,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
   https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 
-apt update
-apt install ca-certificates
+apt install ca-certificates -y
 apt update
 apt install openjdk-11-jdk -y
 apt install jenkins -y
@@ -80,6 +91,8 @@ SSH Agent Plugin
 
 Install Maven : On jenkins server
 
+https://maven.apache.org/
+
 cd /opt
 wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
 
@@ -91,6 +104,8 @@ export PATH=$PATH:$M2_HOME:$M2:$JAVA_HOME
 =======================================================================
 
 Install Tomcat : On remote server
+
+https://tomcat.apache.org/
 
 cd /opt
 wget https://archive.apache.org/dist/tomcat/tomcat-10/v10.0.8/bin/apache-tomcat-10.0.8.tar.gz
@@ -110,6 +125,22 @@ Default Port : 8080
 
 DEPLOY TO DOCKER CONTAINER
 
+useradd dockeradmin
+passwd dockeradmin
+#mkdir /home/dockeradmin
+#cp .profile .bashrc /home/dockeradmin/
+#vi /etc/passwd
+mkdir /opt/build
+chown -R dockeradmin:dockeradmin /opt/build/ /home/dockeradmin/
+usermod -aG docker dockeradmin
+su - dockeradmin
+cd /opt/build
+cp /etc/ansible/* .
+update ansible.cfg and hosts file
+ssh-keygen
+cd ~/.ssh; cp id_rsa.pub authorized_keys
+create push_image_to_dockerhub.yaml & deploy_on_docker_container.yaml playbook 
+
 dockeradmin@kmaster:/opt/build$ cat Dockerfile
 FROM tomcat:latest
 RUN cp -R  /usr/local/tomcat/webapps.dist/*  /usr/local/tomcat/webapps
@@ -117,8 +148,6 @@ COPY ./*.war /usr/local/tomcat/webapps
 
 Pipeline Script:
 cd /opt/build;
-docker container stop demo-app-container;
-docker container rm demo-app-container;
 docker image build -t subodhdere/demo-app:$BUILD_NUMBER .;
 docker container run -d --name demo-app-container -p 1234:8080 subodhdere/demo-app:$BUILD_NUMBER;
 
