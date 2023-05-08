@@ -21,7 +21,7 @@ ansible --version
 ```sh
 #Setup controller and node server :
 useradd ansadmin -p ansadmin -m -s /bin/bash
-add user in /etc/sudoer file | ansadmin   ALL=(ALL) NOPASSWD: ALL
+add user in /etc/sudoers file | ansadmin   ALL=(ALL) NOPASSWD: ALL
 Switch to ansadmin user | su - ansadmin
 generate keys | ssh-keygen
 copy .ssh/id_rsa.pub from controller to all node servers at .ssh/authorized_keys
