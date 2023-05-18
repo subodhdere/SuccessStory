@@ -168,6 +168,7 @@ chmod 700 get_helm.sh
 helm repo list
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
+helm create mytom
 helm install mytom mytom/
 hemin upgrade mytom mytom/
 helm rollback mytom 1
