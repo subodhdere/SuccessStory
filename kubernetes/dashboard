@@ -1,0 +1,11 @@
+Install dashboard:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+
+Create token:
+kubectl create serviceaccount admin-user -n kubernetes-dashboard
+kubectl create clusterrolebinding admin-user --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:admin-user
+kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get serviceaccount/admin-user -o jsonpath='{.secrets[0].name}') -o go-template='{{.data.token | base64decode}}'
+
+Destroy everything we created for dashboard:
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+kubectl delete clusterrolebinding admin-user
